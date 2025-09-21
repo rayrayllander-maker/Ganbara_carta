@@ -103,18 +103,26 @@
 
 /* === Scroll offset ajustes para anclas bajo header fijo + nav móvil === */
 :root {
-  --header-height: 64px;
+  --header-height: 80px; /* antes 64px */
   --mobile-nav-height: 0px; /* se sobreescribe en media query */
   --anchor-extra-gap: 32px; /* espacio adicional para que el título quede más centrado */
+  /* Fondo unificado (mismo gradiente y opacidad para header y menú móvil) */
+  --header-base-rgb: 15,15,15; /* #0F0F0F */
+  --header-alpha: 1; /* se animará con scroll (1 -> 0.78 aprox) */
+  --header-bg: rgba(var(--header-base-rgb), var(--header-alpha));
 }
 @media (max-width:600px){
   :root { --header-height:56px; }
 }
 @media (max-width:900px){
   :root { --mobile-nav-height:84px; }
+  .mobile-nav{top:var(--header-height);} /* antes 64px */
+  body{padding-top:calc(var(--header-height) + 84px)}
 }
 @media (max-width:600px){
   :root { --mobile-nav-height:76px; }
+  .mobile-nav{top:var(--header-height);} /* ajusta al header reducido */
+  body{padding-top:calc(var(--header-height) + var(--mobile-nav-height))}
 }
 
 /* Aplicar scroll-margin-top a secciones anclables para scrollIntoView nativo */
@@ -128,21 +136,49 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-s
 
 .container{max-width:1100px;margin:0 auto;padding:0 16px}
 
-/* Header */
-.site-header{position:fixed;top:0;left:0;right:0;background:rgba(20,20,20,0.92);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.12);z-index:9999}
-.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0;height:64px}
+/* Header: usa el mismo gradiente que el nav (sin cambio en scroll) */
+.site-header{position:fixed;top:0;left:0;right:0;background:var(--header-bg);border-bottom:0;z-index:9999;transition:background .35s ease, box-shadow .35s ease, height .25s ease;will-change:background}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;height:var(--header-height)}
 
 /* keep page content visible under fixed header */
-body{padding-top:64px}
+body{padding-top:var(--header-height)}
 .brand{display:flex;align-items:center;text-decoration:none;color:var(--text)}
-.brand-logo{width:72px;height:72px;object-fit:contain;border-radius:8px;margin-right:0}
+/* Logo: usar escala para evitar reflow y parpadeos en algunos navegadores móviles */
+/* transform-origin left center para que al escalar no empuje el texto */
+.brand-logo{width:80px;height:80px;object-fit:contain;border-radius:8px;margin-right:0;transform-origin:left center;transition:transform .28s ease,filter .28s ease;will-change:transform;position:relative;z-index:11020}
+.brand{position:relative;z-index:11010}
 .brand-text{display:inline-block;margin-left:10px;font-weight:700;color:#fff;font-family:Merriweather,serif}
 
-/* Hamburger (mobile) */
-.hamburger{display:none;background:transparent;border:0;color:#fff;font-size:22px;padding:8px 10px;cursor:pointer}
+/* Estado reducido cuando se hace scroll */
+/* En estado reducido sólo escalamos (mejor performance / sin flicker) */
+.site-header.is-scrolled .brand-logo{transform:scale(.75)}
+/* Ajustar header para animación */
+.site-header{transition:background .35s ease, box-shadow .35s ease, height .25s ease}
+.header-inner{transition:padding .25s ease, height .25s ease}
+.site-header.is-scrolled .header-inner{padding:6px 0;}
+
+/* Accesibilidad: reducir movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce){
+  .brand-logo{transition:none !important}
+  .site-header,.header-inner,.mobile-nav a{transition:none !important}
+  .site-header.is-scrolled .brand-logo{transform:scale(.85)}
+}
+
+/* Mobile nav conectado visualmente al header */
+@media (max-width:900px){
+  .mobile-nav{top:var(--header-height);background:var(--header-bg);border-top:0;border-bottom:0;box-shadow:0 4px 16px rgba(0,0,0,0.28);transition:background .35s ease, box-shadow .35s ease;will-change:background;} 
+  .site-header.is-scrolled .mobile-nav{background:var(--header-bg);} 
+}
+
+/* Clase para shrink: no cambia el fondo para evitar flash o diferencia */
+.site-header.is-scrolled{box-shadow:0 4px 16px rgba(0,0,0,0.25)}
+/* Eliminado transform para que el título no cambie de posición al hacer scroll */
+/* .site-header.is-scrolled .brand-text{transform:translateY(-2px);} */
+
 /* Mobile nav: visible bar under header on small screens (not off-canvas) */
 .mobile-nav{display:none}
-.mobile-nav a{flex:0 0 auto;min-width:72px;max-width:140px;margin:0 10px;color:#111;background:none;border:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 10px;font-weight:600;transition:background 0.2s,color 0.2s;text-align:center}
+/* Mobile nav link base styles (with corrected transition syntax) */
+.mobile-nav a{flex:0 0 auto;min-width:72px;max-width:140px;margin:0 10px;color:#111;background:none;border:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 10px;font-weight:600;transition:background .2s,color .2s;text-align:center}
 .mobile-nav a .nav-icon{width:36px;height:36px;margin-bottom:6px;display:block}
 .mobile-nav a span{display:block;font-size:13px;line-height:1.1;color:#111}
 .mobile-nav a.active,.mobile-nav a:focus,.mobile-nav a:hover{background:#f2f2f2;color:#000}
@@ -167,24 +203,15 @@ body{padding-top:64px}
 
 /* Hide text labels visually on mobile while keeping them for screen readers */
 @media (max-width:900px){
-  /* Show mobile nav as a visible bar under the header */
-  .mobile-nav{display:flex;position:fixed;top:64px;left:0;right:0;transform:none;opacity:1;flex-direction:row;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:0;align-items:stretch;padding:10px 12px;width:100vw;max-width:100vw;box-sizing:border-box;-webkit-overflow-scrolling:touch;height:84px;background:rgba(20,20,20,0.92);border-bottom:1px solid rgba(255,255,255,0.04);box-shadow:0 6px 18px rgba(0,0,0,0.08);z-index:10001}
-  .mobile-nav a{flex:0 0 auto;min-width:64px;max-width:120px;margin:0 8px;color:#fff;background:none;border:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 6px;font-weight:600;transition:background 0.18s,color 0.18s;text-align:center}
+  /* Mobile nav bar directly beneath fixed header; uses CSS vars for offsets – fondo unificado */
+  .mobile-nav{display:flex;position:fixed;top:var(--header-height);left:0;right:0;transform:none;opacity:1;flex-direction:row;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:0;align-items:stretch;padding:10px 12px;width:100vw;max-width:100vw;box-sizing:border-box;-webkit-overflow-scrolling:touch;height:var(--mobile-nav-height);background:var(--header-bg);border:0;box-shadow:0 6px 18px rgba(0,0,0,0.08);z-index:10001;transition:background .35s ease, box-shadow .35s ease;will-change:background}
+  .mobile-nav a{flex:0 0 auto;min-width:64px;max-width:120px;margin:0 8px;color:#fff;background:none;border:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 6px;font-weight:600;transition:background .18s,color .18s;text-align:center}
   .mobile-nav .nav-label{position:absolute !important;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
-  .mobile-nav a{padding:8px 6px}
   .mobile-nav a .nav-icon{width:36px;height:36px}
   .mobile-nav a:hover, .mobile-nav a:focus{background:rgba(255,255,255,0.04);color:#fff}
 
-  /* When mobile nav is visible, push page down so content isn't hidden */
-  body{padding-top:calc(64px + 84px)}
-
-  /* Reduce top offset when header is smaller on narrow screens */
-  @media (max-width:600px){
-    .site-header{height:56px}
-    .header-inner{height:56px}
-    .mobile-nav{top:56px;height:76px}
-    body{padding-top:calc(56px + 76px)}
-  }
+  /* Push page content below header + nav using variables */
+  body{padding-top:calc(var(--header-height) + var(--mobile-nav-height))}
 }
 
 .main-nav{display:flex;gap:14px}
@@ -295,7 +322,6 @@ body{padding-top:64px}
 @media (max-width:900px){
   .main-nav { display: none !important; }
   /* Ensure hamburger is available when resizing desktop to narrow viewports */
-  .hamburger { display: block !important; }
   .mobile-nav {
     display: flex !important;
     visibility: visible !important;
@@ -364,9 +390,19 @@ body{padding-top:64px}
   }
 }
 
-/* Icono contacto en blanco (usa filtro para raster/paths negros) */
-.nav-icon--white{ filter: invert(100%) brightness(110%); }
-@media (min-width:901px){
-  /* Si en desktop quisieras mantenerlo de color original, elimina esta regla */
-  .nav-icon--white{ filter: invert(100%) brightness(115%); }
+/* === Iconos menú en blanco === */
+.mobile-nav a .nav-icon, .main-nav a .nav-icon {
+  /* Para SVG inline (sprite) */
+  fill: #fff !important;
+  stroke: #fff !important;
 }
+/* Para <img> raster/SVG externos: usar filtro para invertir si son oscuros */
+.mobile-nav a img.nav-icon, .main-nav a img.nav-icon {
+  filter: brightness(0) invert(1) saturate(0%) contrast(105%);
+}
+.mobile-nav a:hover .nav-icon, .mobile-nav a:focus .nav-icon, .main-nav a:hover .nav-icon, .main-nav a:focus .nav-icon {
+  filter: brightness(1.2) drop-shadow(0 0 4px rgba(255,255,255,0.35));
+}
+
+/* Si algún icono ya es claro y se ve lavado, se puede excluir con una clase: .no-invert */
+.no-invert { filter: none !important; }

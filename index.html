@@ -1,13 +1,20 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Ganbara — Carta</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ganbara — Carta</title>
+  <meta name="description" content="Carta de Ganbara: hamburguesas, chuletas, raciones y bocadillos con ingredientes locales." />
+  <meta name="theme-color" content="#181818" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" type="image/png" href="Logo_color_ganbara.png" />
+  <!-- Preload fuentes principales para reducir FOUT -->
+  <link rel="preload" href="https://fonts.gstatic.com/s/merriweather/v30/u-4k0qyriQwlOrhSvowK_l5-eR71.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTcviYwY.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" media="all">
     <style>
       /* --- Estilos para mostrar/ocultar menú --- */
       /* Ocultar el botón de hamburguesa en escritorio */
@@ -67,7 +74,7 @@
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="#inicio">
-          <img src="Logo_color_ganbara.png" alt="Logo Ganbara" class="brand-logo" width="72" height="72" loading="lazy">
+          <img src="Logo_color_ganbara.png" alt="Logo Ganbara" class="brand-logo" width="80" height="80" fetchpriority="high" decoding="async">
           <span class="brand-text">Ganbara</span>
         </a>
 
@@ -84,11 +91,9 @@
           <button class="lang-btn" aria-label="Cambiar idioma" data-i18n="lang.btn">ESP / EUS</button>
         </div>
 
-  <!-- Mobile menu toggle -->
-  <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">☰</button>
   <div id="mobile-nav" class="mobile-nav" aria-hidden="false" role="navigation">
           <a href="#inicio" data-i18n="nav.inicio" aria-label="Inicio">
-            <svg class="nav-icon" width="32" height="32" aria-hidden="true"><use href="icons.svg#icon-home"></use></svg>
+            <img src="inicio.svg" class="nav-icon" width="32" height="32" alt="" aria-hidden="true" loading="lazy" />
             <span class="nav-label">Inicio</span>
           </a>
           <a href="#hamburguesas" data-i18n="nav.hamburguesas" aria-label="Hamburguesas">
@@ -96,7 +101,7 @@
             <span class="nav-label">Hamburguesas</span>
           </a>
           <a href="#chuletas" data-i18n="nav.chuletas" aria-label="Chuletas">
-            <img src="jamon.svg" class="nav-icon" width="32" height="32" alt="" aria-hidden="true" loading="lazy" />
+            <img src="chuleta.svg" class="nav-icon" width="32" height="32" alt="" aria-hidden="true" loading="lazy" />
             <span class="nav-label">Chuletas</span>
           </a>
           <a href="#raciones" data-i18n="nav.raciones" aria-label="Raciones">
@@ -108,7 +113,7 @@
             <span class="nav-label">Bocadillos</span>
           </a>
           <a href="#contacto" data-i18n="nav.contacto" aria-label="Contacto">
-            <img src="contacto.svg" class="nav-icon nav-icon--white" width="32" height="32" alt="" aria-hidden="true" loading="lazy" />
+            <img src="contacto.svg" class="nav-icon" width="32" height="32" alt="" aria-hidden="true" loading="lazy" />
             <span class="nav-label">Contacto</span>
           </a>
         </div>
@@ -118,7 +123,7 @@
     <main>
       <section id="inicio" class="hero">
         <div class="container hero-inner" style="position:relative;">
-          <img src="Logo_color_ganbara.png" alt="Logo Ganbara" class="logo-bg-hero" width="320" height="320" loading="lazy">
+          <img src="Logo_color_ganbara.png" alt="" class="logo-bg-hero" width="320" height="320" loading="lazy" decoding="async" aria-hidden="true">
           <h1 data-i18n="hero.title" style="position:relative; z-index:2;">Ganbara</h1>
           <p class="lead" data-i18n="hero.lead">Sabor a nuestra tierra. Ingredientes locales y recetas con carácter.</p>
           <a class="cta" href="#hamburguesas" data-i18n="hero.cta">Ver la carta</a>
@@ -215,7 +220,7 @@
 
   <section id="chuletas" class="section alt">
         <div class="container">
-          <h2 class="section-title" data-i18n="section.chuletas">Chuletas</h2>
+          <h2 class="section-title" data-i18n="section.chuletas">Hamburguesas de Chuleta</h2>
           <div class="grid cards">
             <article class="card menu-card">
               <div class="menu-card-header">
@@ -308,7 +313,7 @@
 
       <section id="bocadillos" class="section alt">
         <div class="container">
-          <h2 class="section-title" data-i18n="section.bocadillos">OGITARTEKOAK / BOCADILLOS</h2>
+          <h2 class="section-title" data-i18n="section.bocadillos">Ogitartekoak / Bocadillos</h2>
           <div class="grid cards">
             <article class="card menu-card">
               <div class="menu-card-header">
@@ -398,7 +403,7 @@
             <div class="contact-info-block">
               <div class="contact-row">
                 <span class="contact-icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3 5.18 2 2 0 0 1 5 3h0a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4.09"/></svg>
+                  <img src="contacto.svg" alt="" class="contact-icon-img" width="24" height="24" loading="lazy" decoding="async" />
                 </span>
                 <div>
                   <div class="contact-label" data-i18n="contact.phone" style="font-weight:600;">Teléfono</div>
@@ -407,7 +412,7 @@
               </div>
               <div class="contact-row">
                 <span class="contact-icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><path d="M21 10.5a8.38 8.38 0 0 1-1.9.5 4.48 4.48 0 0 0-7.6 0A8.38 8.38 0 0 1 3 10.5V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8.5z"/><circle cx="12" cy="7" r="4"/></svg>
+                  <img src="mapa.svg" alt="" class="contact-icon-img" width="24" height="24" loading="lazy" decoding="async" />
                 </span>
                 <div>
                   <div class="contact-label" data-i18n="contact.address" style="font-weight:600;">Dirección</div>
@@ -416,7 +421,7 @@
               </div>
               <div class="contact-row">
                 <span class="contact-icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <img src="hora.svg" alt="" class="contact-icon-img" width="24" height="24" loading="lazy" decoding="async" />
                 </span>
                 <div>
                   <div class="contact-label" data-i18n="contact.hours" style="font-weight:600;">Horario</div>
@@ -468,6 +473,13 @@
         color: var(--accent-dark, #222);
         min-width: 2.1rem;
         text-align: center;
+      }
+      .contact-icon-img {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        vertical-align: middle;
       }
       .contact-label {
         font-size: 1.1rem;
@@ -564,6 +576,39 @@
             }
           });
         });
+
+        // Animación shrink del header al hacer scroll
+        const header = document.querySelector('.site-header');
+        let lastState = false; // false = no scrolled
+        function onScroll(){
+          const scrolled = window.scrollY > 40; // umbral
+            if(scrolled !== lastState){
+              header && header.classList.toggle('is-scrolled', scrolled);
+              lastState = scrolled;
+            }
+        }
+        window.addEventListener('scroll', onScroll, {passive:true});
+        onScroll();
+
+        // --- Transparencia dinámica (header + mobile nav) ---
+        const docEl = document.documentElement;
+        let ticking = false;
+        function updateAlpha(){
+          const y = window.scrollY;
+            // Rango: 0px -> alpha 1, 300px -> alpha 0.78 (ajustable)
+          const max = 300;
+          const minAlpha = 0.78;
+          const alpha = (y >= max) ? minAlpha : (1 - ( (1-minAlpha) * (y/max) ));
+          docEl.style.setProperty('--header-alpha', alpha.toFixed(3));
+          ticking = false;
+        }
+        window.addEventListener('scroll', () => {
+          if(!ticking){
+            requestAnimationFrame(updateAlpha);
+            ticking = true;
+          }
+        }, {passive:true});
+        updateAlpha();
       })();
     </script>
     <script>
@@ -612,7 +657,7 @@
             'hero.cta': 'Ver la carta',
             'section.hamburguesas.title': 'Nuestras Hamburguesas',
             'section.hamburguesas.sub': 'Todas con 180 gr. de carne Angus, a menos que se indique lo contrario.',
-            'section.chuletas': 'Chuletas',
+            'section.chuletas': 'Hamburguesas de Chuleta',
             'section.raciones': 'Raciones',
             'section.contacto': 'Contacto',
             'contact.address': 'Dirección',
@@ -652,7 +697,7 @@
             'item.vegetariana.title': 'VEGETARIANA',
             'item.vegetariana.desc': 'Carne vegetal, lechuga, tomate, cebolla morada, huevo y queso cheddar.',
             // Bocadillos ES
-            'section.bocadillos': 'BOCADILLOS',
+            'section.bocadillos': 'Bocadillos',
             'bocadillo.1.title': 'Vegetal de pollo',
             'bocadillo.1.desc': 'Pechuga, Lechuga, tomate, york, queso, mayonesa, atún y huevo cocido',
             'bocadillo.2.title': 'Tortillas variadas',
@@ -746,7 +791,7 @@
             'item.vegetariana.title': 'BEGETARIANA',
             'item.vegetariana.desc': 'Eura haragia, letxuga, tomatea, tipula morea, arrautza eta cheddar gazta.',
             // Bocadillos EU
-            'section.bocadillos': 'OGITARTEKOAK',
+            'section.bocadillos': 'Ogitartekoak',
             'bocadillo.1.title': 'Oilasko begetala',
             'bocadillo.1.desc': 'Paparra, letxuga, tomatea, york, gazta, maionesa, hegaluzea eta arrautza egosia',
             'bocadillo.2.title': 'Tortilla ezberdinak',
