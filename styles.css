@@ -1,0 +1,347 @@
+/* Estilo para cards de menú tipo blackbox */
+.menu-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: #fff;
+  margin-bottom: 24px;
+  padding: 24px 28px 18px 28px;
+  min-width: 260px;
+  max-width: 100%;
+  transition: box-shadow 0.18s;
+}
+.menu-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+}
+.menu-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.menu-card-title {
+  font-family: Merriweather, serif;
+  font-size: 1.25em;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #181818;
+}
+.menu-card-price {
+  font-family: Inter, Arial, sans-serif;
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #1a7f3c;
+  background: #f2f9f3;
+  border-radius: 8px;
+  padding: 2px 14px;
+  margin-left: 16px;
+  min-width: 70px;
+  text-align: right;
+}
+.menu-card-desc {
+  color: #222;
+  font-size: 1.05em;
+  margin-top: 2px;
+  line-height: 1.5;
+}
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px 32px;
+}
+
+/* Cards that include an image for the dish */
+.menu-with-image {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+  padding: 12px;
+}
+.menu-with-image .menu-card-media {
+  flex: 0 0 160px;
+  max-width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-with-image .menu-card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+}
+.menu-with-image .menu-card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Make image-cards stack vertically on small screens */
+@media (max-width: 900px) {
+  .menu-with-image { flex-direction: column; padding: 12px 10px; }
+  .menu-with-image .menu-card-media { flex: 0 0 auto; max-width: 100%; }
+  .menu-with-image .menu-card-image { width: 100%; height: 180px; object-fit: cover; }
+}
+
+/* Variant: image on top for featured cards (like Mexicana) */
+.menu-image-top { display: flex; flex-direction: column; gap: 12px; padding: 8px; }
+.menu-image-top .menu-card-media { width: 100%; max-width: 100%; }
+.menu-image-top .menu-card-image { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); filter: contrast(1.05) saturate(1.05); background: #f6f6f6; }
+.menu-image-top .menu-card-body { padding: 6px 2px 0 2px; }
+
+@media (max-width: 900px) {
+  .menu-image-top .menu-card-image { height: 180px; }
+}
+:root{
+  --accent:#D4A056;
+  --accent-dark:#b8863f;
+  --bg:#F5F5F5;
+  --text:#2E2E2E;
+  --muted:#6B6B6B;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* Header */
+.site-header{position:fixed;top:0;left:0;right:0;background:rgba(20,20,20,0.92);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,0,0,0.12);z-index:9999}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0;height:64px}
+
+/* keep page content visible under fixed header */
+body{padding-top:64px}
+.brand{display:flex;align-items:center;text-decoration:none;color:var(--text)}
+.brand-logo{width:72px;height:72px;object-fit:contain;border-radius:8px;margin-right:0}
+.brand-text{display:inline-block;margin-left:10px;font-weight:700;color:#fff;font-family:Merriweather,serif}
+
+/* Hamburger (mobile) */
+.hamburger{display:none;background:transparent;border:0;color:#fff;font-size:22px;padding:8px 10px;cursor:pointer}
+/* Mobile nav: visible bar under header on small screens (not off-canvas) */
+.mobile-nav{display:none}
+.mobile-nav a{flex:0 0 auto;min-width:72px;max-width:140px;margin:0 10px;color:#111;background:none;border:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 10px;font-weight:600;transition:background 0.2s,color 0.2s;text-align:center}
+.mobile-nav a .nav-icon{width:36px;height:36px;margin-bottom:6px;display:block}
+.mobile-nav a span{display:block;font-size:13px;line-height:1.1;color:#111}
+.mobile-nav a.active,.mobile-nav a:focus,.mobile-nav a:hover{background:#f2f2f2;color:#000}
+/* .mobile-close removed: mobile nav is persistent */
+.mobile-nav .nav-icon{display:block;margin:0 auto 4px auto;width:32px;height:32px;fill:currentColor}
+
+/* Labels injected by JS (i18n) */
+.nav-label{display:block;font-size:13px;color:#111;margin-top:4px}
+
+/* Mobile tap sizes and spacing */
+@media (max-width:480px){
+  .mobile-nav{padding:12px;height:92px}
+  .mobile-nav a{min-width:64px;margin:0 8px;padding:8px 6px}
+  .mobile-nav a .nav-icon{width:32px;height:32px}
+  .mobile-nav a span{font-size:12px}
+  .hero h1{font-size:28px}
+  .lead{font-size:16px}
+  .cta{padding:12px 20px}
+  .card h3{font-size:18px}
+  .contact-grid{grid-template-columns:1fr;gap:12px}
+}
+
+/* Hide text labels visually on mobile while keeping them for screen readers */
+@media (max-width:900px){
+  /* Show mobile nav as a visible bar under the header */
+  .mobile-nav{display:flex;position:fixed;top:64px;left:0;right:0;transform:none;opacity:1;flex-direction:row;overflow-x:auto;overflow-y:hidden;white-space:nowrap;gap:0;align-items:stretch;padding:10px 12px;width:100vw;max-width:100vw;box-sizing:border-box;-webkit-overflow-scrolling:touch;height:84px;background:rgba(20,20,20,0.92);border-bottom:1px solid rgba(255,255,255,0.04);box-shadow:0 6px 18px rgba(0,0,0,0.08);z-index:10001}
+  .mobile-nav a{flex:0 0 auto;min-width:64px;max-width:120px;margin:0 8px;color:#fff;background:none;border:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 6px;font-weight:600;transition:background 0.18s,color 0.18s;text-align:center}
+  .mobile-nav .nav-label{position:absolute !important;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
+  .mobile-nav a{padding:8px 6px}
+  .mobile-nav a .nav-icon{width:36px;height:36px}
+  .mobile-nav a:hover, .mobile-nav a:focus{background:rgba(255,255,255,0.04);color:#fff}
+
+  /* When mobile nav is visible, push page down so content isn't hidden */
+  body{padding-top:calc(64px + 84px)}
+
+  /* Reduce top offset when header is smaller on narrow screens */
+  @media (max-width:600px){
+    .site-header{height:56px}
+    .header-inner{height:56px}
+    .mobile-nav{top:56px;height:76px}
+    body{padding-top:calc(56px + 76px)}
+  }
+}
+
+.main-nav{display:flex;gap:14px}
+.main-nav a{color:#fff;text-decoration:none;font-weight:600;padding:8px 12px;border-radius:6px;background:rgba(0,0,0,0.15)}
+.main-nav a:hover{background:rgba(0,0,0,0.25)}
+
+/* CTA-style nav button for desktop */
+.main-nav .nav-cta{
+  background:var(--accent);
+  color:#fff;
+  padding:8px 12px;
+  border-radius:10px;
+  margin-left:8px;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 8px 24px rgba(20,20,20,0.12);
+  transition:transform .12s ease,opacity .12s ease,background .12s ease;
+}
+.main-nav .nav-cta:hover{transform:translateY(-2px);background:var(--accent-dark)}
+
+@media (max-width:900px){
+  .main-nav .nav-cta{display:none}
+}
+
+.header-actions{display:flex;align-items:center;gap:12px}
+
+.lang-btn{
+  appearance:none;
+  border:0;
+  background:var(--accent);
+  color:#fff;
+  padding:8px 14px;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(20,20,20,0.12);
+  transition:transform .12s ease,box-shadow .12s ease,opacity .12s ease;
+}
+.lang-btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(20,20,20,0.14)}
+
+@media (max-width:480px){
+  .lang-btn{padding:6px 10px;font-size:13px}
+}
+
+/* Hero */
+.hero{padding:100px 0 120px;background-image:linear-gradient(135deg, rgba(150,110,60,0.96) 0%, rgba(12,12,12,0.92) 75%);background-size:cover;background-position:center;color:#fff}
+.hero-inner{text-align:center;padding:32px 0}
+.hero h1{font-family:Merriweather,serif;font-size:56px;margin:10px 0 12px;letter-spacing:1px}
+.lead{font-size:20px;opacity:0.95;max-width:px;margin:0 auto}
+.cta{display:inline-block;margin-top:20px;background:var(--accent);color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,0.18)}
+.cta:hover{background:var(--accent-dark)}
+
+/* Sections */
+.section{padding:56px 0;background:var(--bg)}
+.section.alt{background:#fff}
+.section-title{font-family:Merriweather,serif;font-size:28px;text-align:center;margin:0 0 8px}
+.section-sub{text-align:center;color:var(--muted);margin-bottom:28px}
+
+.grid{display:grid;gap:22px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.txuletas{grid-template-columns:1fr 1fr}
+
+.card{background:#fff;border-radius:12px;padding:20px;border:1px solid rgba(0,0,0,0.06);box-shadow:0 10px 30px rgba(16,24,40,0.06)}
+.card h3{margin:0 0 10px;font-size:20px;display:flex;justify-content:space-between;align-items:center}
+.price{
+  font-weight:900;
+  color:#d90000 !important;
+  margin-left:8px;
+  font-weight:700;
+  color:#1a7f3c !important;
+  margin-left:10px;
+  font-size:1.15em;
+  background: #f9f5ee;
+  padding: 2px 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(212,160,86,0.10);
+  line-height:1.2;
+  display:inline-block;
+  vertical-align:middle;
+  transition:background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.footer-section{padding:36px 0}
+.muted{color:var(--muted)}
+
+/* Footer */
+.site-footer{border-top:1px solid rgba(0,0,0,0.05);background:transparent;padding:18px 0}
+.footer-inner{display:flex;justify-content:center}
+
+/* Contact grid */
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:16px}
+.contact-item h3{margin:0 0 6px;font-size:16px}
+.contact-item p{margin:0;color:var(--muted)}
+.contact-item a{color:var(--text);text-decoration:none;font-weight:600}
+
+/* Footer layout */
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.footer-left small,.footer-right small{color:var(--muted)}
+
+@media (max-width:800px){
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-inner{flex-direction:column;gap:6px}
+}
+
+/* Strong override: ensure mobile nav always visible when viewport is narrow
+   This fixes cases where other styles (including inline <style> in index.html)
+   hide the mobile nav when resizing the desktop window. */
+@media (max-width:900px){
+  .main-nav { display: none !important; }
+  /* Ensure hamburger is available when resizing desktop to narrow viewports */
+  .hamburger { display: block !important; }
+  .mobile-nav {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+  .mobile-nav a { color: #fff !important; }
+  .mobile-nav .nav-icon { fill: #fff !important; width:36px !important; height:36px !important; }
+  .mobile-nav .nav-label { color: #fff !important; }
+}
+
+/* --- Mejora contraste y tabla de horario --- */
+:root {
+  --text: #181818;
+  --muted: #444;
+}
+.main-nav a {
+  background: rgba(0,0,0,0.22);
+}
+.main-nav a:hover {
+  background: rgba(0,0,0,0.32);
+}
+.card {
+  border: 1px solid rgba(0,0,0,0.10);
+  box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+}
+.card p {
+  color: #222;
+}
+.muted {
+  color: var(--muted);
+  font-weight: 500;
+}
+.cta {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.10);
+}
+.cta:hover {
+  color: #fff;
+}
+/* Contact hours table */
+.hours-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+}
+.hours-table td {
+  padding: 4px 8px;
+  font-size: 15px;
+  color: #222;
+}
+.hours-table tr:nth-child(even) {
+  background: #f7f7f7;
+}
+.hours-table tr:nth-child(odd) {
+  background: #fff;
+}
+.hours-table td:first-child {
+  font-weight: 600;
+  color: var(--accent-dark);
+}
+@media (max-width:600px) {
+  .hours-table td {
+    font-size: 14px;
+    padding: 4px 4px;
+  }
+}
+
+/* (Removed duplicate force-block) consolidated above to avoid hiding the hamburger
+   when desktop windows are resized. The responsive mobile-nav rules are defined
+   once and marked important to survive conflicting styles. */
