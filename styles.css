@@ -101,6 +101,28 @@
   --muted:#6B6B6B;
 }
 
+/* === Scroll offset ajustes para anclas bajo header fijo + nav móvil === */
+:root {
+  --header-height: 64px;
+  --mobile-nav-height: 0px; /* se sobreescribe en media query */
+  --anchor-extra-gap: 32px; /* espacio adicional para que el título quede más centrado */
+}
+@media (max-width:600px){
+  :root { --header-height:56px; }
+}
+@media (max-width:900px){
+  :root { --mobile-nav-height:84px; }
+}
+@media (max-width:600px){
+  :root { --mobile-nav-height:76px; }
+}
+
+/* Aplicar scroll-margin-top a secciones anclables para scrollIntoView nativo */
+section[id] { scroll-margin-top: calc(var(--header-height) + var(--mobile-nav-height) + var(--anchor-extra-gap)); }
+
+/* Ajuste específico: héroe puede tener menos gap para verse completa */
+#inicio { scroll-margin-top: calc(var(--header-height) + var(--mobile-nav-height) + 12px); }
+
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
 
@@ -342,6 +364,9 @@ body{padding-top:64px}
   }
 }
 
-/* (Removed duplicate force-block) consolidated above to avoid hiding the hamburger
-   when desktop windows are resized. The responsive mobile-nav rules are defined
-   once and marked important to survive conflicting styles. */
+/* Icono contacto en blanco (usa filtro para raster/paths negros) */
+.nav-icon--white{ filter: invert(100%) brightness(110%); }
+@media (min-width:901px){
+  /* Si en desktop quisieras mantenerlo de color original, elimina esta regla */
+  .nav-icon--white{ filter: invert(100%) brightness(115%); }
+}
