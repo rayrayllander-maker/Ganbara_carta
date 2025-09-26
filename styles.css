@@ -267,7 +267,7 @@ body{padding-top:var(--header-height)}
 /* Sections */
 .section{padding:56px 0;background:var(--bg)}
 .section.alt{background:#fff}
-.section-title{font-family:Merriweather,serif;font-size:28px;text-align:center;margin:0 0 8px}
+.section-title{font-family:Merriweather,serif;font-size:28px;text-align:center;margin:0 0 px}
 .section-sub{text-align:center;color:var(--muted);margin-bottom:28px}
 
 .grid{display:grid;gap:22px}
