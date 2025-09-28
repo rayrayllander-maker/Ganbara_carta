@@ -1,0 +1,36 @@
+Category,Subcategory,Order,Name,Price(s),Description (ES)
+Hamburguesas,Clásicas,1,GANBARA,"13,5€","180 gr. de carne Angus, lechuga, tomate, cebolla caramelizada, queso Idiazabal, doble de bacon, huevo"
+Hamburguesas,Clásicas,2,AGRIDULCE,13€,"180 gr. de carne Angus, lechuga, tomate, cebolla, queso cheddar, doble de bacon y salsa de miel y mostaza"
+Hamburguesas,Clásicas,3,GOLOSA,13€,"180 gr. de carne Angus, doble de bacon, cebolla, champis laminados y queso Camembert"
+Hamburguesas,Clásicas,4,SERRANA,13€,"180 gr. de carne Angus, queso danés, cebolla morada, jamón, hilos de patata y salsa tártara"
+Hamburguesas,Clásicas,5,EMMY,"13,5€","180 gr. de carne Angus, queso cheddar, doble de bacon, cebolla caramelizada, pepinillos, huevo y salsa Emmy"
+Hamburguesas,Clásicas,6,COLOMBIANA,"14,5€","180 gr. de carne Angus, queso cheddar, hilos de patata, 70 gr. de carne mechada y salsa de piña"
+Hamburguesas,Clásicas,7,BACONESSA,14€,"180 gr. de carne Angus, doble de queso danés, doble de bacon, bacon crispy, cebolla crispy, huevo y salsa Baconessa"
+Hamburguesas,Clásicas,8,BBQ,13€,"180 gr. de carne Angus, doble de queso danés, doble de bacon, chaskis y salsa Barbacoa"
+Hamburguesas,Clásicas,9,AZTECA,"13,5€","180 gr. de carne Angus, queso cheddar, cebolla crispy, guacamole, pimientos de piquillo asado y salsa de jalapeño ahumada"
+Hamburguesas,Clásicas,10,CLÁSICA,"12,5€","180 gr. de carne Angus, queso cheddar, doble de bacon, pepinillo y salsa Burger"
+Hamburguesas,Clásicas,11,VEGETARIANA,"12,5€","Carne vegetal, lechuga, tomate, cebolla morada, huevo y queso cheddar"
+Hamburguesas,Chuleta,1,GANBARA TURBO,15€,"200 gr. de carne de chuleta, queso cheddar, cebolla caramelizada, doble de bacón, 70 gr. de carne mechada y salsa guasacaca"
+Hamburguesas,Chuleta,2,EUSKALDUNA,"14,5€","200 gr. de carne de chuleta, queso Idiazabal, doble de bacón y huevo"
+Raciones,,1,Paletilla de jamón ibérico,"17€ / 9€","Paletilla de jamón ibérico"
+Raciones,,2,Rabas,"9,5€ / 5,5€","Rabas"
+Raciones,,3,Rabas, cebolla crujiente y alioli,9,5€,Rabas, cebolla crujiente y alioli
+Raciones,,4,Patata casera,"6€ / 7€","Brava y alioli (6€) / Bravioi (7€)"
+Raciones,,5,Croquetas de jamón o de hongos,9,5€,Croquetas de jamón o de hongos
+Raciones,,6,Champis con gambas a la vinagreta,8,5€,Champis con gambas a la vinagreta
+Raciones,,7,Piezas de pollo crujiente con patatas,9,5€,Piezas de pollo crujiente con patatas
+Raciones,,8,Pimientos verdes,8,5€,Pimientos verdes
+Raciones,,9,Patatas Ganbara,7€,Patatas caseras, bacón crujiente y salsa cheddar
+Bocadillos,,1,1. Vegetal de pollo,7,5€,Pechuga, Lechuga, tomate, york, queso, mayonesa, atún y huevo cocido
+Bocadillos,,2,2. Tortillas variadas,6,5€,Chorizo, patata, jamón o champis
+Bocadillos,,3,3. Bacón, queso y pimientos,7€,Bacón, queso y pimientos
+Bocadillos,,4,4. Lomo, queso y pimientos,7€,Lomo, queso y pimientos
+Bocadillos,,5,5. Pechuga, queso y pimientos,7€,Pechuga, queso y pimientos
+Bocadillos,,6,6. Pechuga rebozada con alioli, bacón y cebolla,7,5€,Pechuga rebozada, alioli, bacón y cebolla
+Bocadillos,,7,7. Jamón ibérico, queso, setas y tomate a la plancha,8€,Jamón ibérico, queso, setas y rodajas de tomate a la plancha
+Bocadillos,,8,8. Jamón ibérico,7€,Jamón ibérico
+Bocadillos,,9,9. Especial,8€,Jamón, pimientos verdes, queso Idiazabal y setas
+Bocadillos,,10,10. Pechuga crujiente con mermelada y queso Camembert,7,5€,Pechuga crujiente, mermelada y queso Camembert
+Bocadillos,,11,11. Vegetariana,7€,Calabacín, pimientos verdes, cebolla morada, tomate, guacamole, huevo y queso danés
+Postres,,1,Tarta de queso,5€,Tarta de queso
+Postres,,2,Coulant de chocolate,5€,Coulant de chocolate
