@@ -13,8 +13,12 @@
   <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTcviYwY.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Extra fonts for brand title -->
+  <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Playwrite+DE+SAS:wght@100..400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" media="all">
+    <!-- Font Awesome for icons (pepper-hot) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
     <style>
       /* --- Estilos para mostrar/ocultar menú --- */
       /* Ocultar el botón de hamburguesa en escritorio */
@@ -172,7 +176,7 @@
             </article>
             <article class="card menu-card">
               <div class="menu-card-header">
-                <span class="menu-card-title" data-i18n="item.emmy.title">EMMY</span>
+                <span class="menu-card-title-wrapper"><span class="menu-card-title" data-i18n="item.emmy.title">EMMY</span><span class="spicy-icon" aria-label="Picante"><i class="fa-solid fa-pepper-hot" aria-hidden="true"></i></span></span>
                 <span class="menu-card-price">13,5€</span>
               </div>
               <div class="menu-card-desc" data-i18n="item.emmy.desc">180 gr. de carne Angus, queso cheddar, doble de bacon, cebolla caramelizada, pepinillos, huevo y salsa Emmy.</div>
@@ -200,7 +204,7 @@
             </article>
             <article class="card menu-card">
               <div class="menu-card-header">
-                <span class="menu-card-title" data-i18n="item.azteca.title">AZTECA</span>
+                <span class="menu-card-title-wrapper"><span class="menu-card-title" data-i18n="item.azteca.title">AZTECA</span><span class="spicy-icon" aria-label="Muy picante" title="Muy picante"><i class="fa-solid fa-pepper-hot" aria-hidden="true"></i><i class="fa-solid fa-pepper-hot" aria-hidden="true"></i></span></span>
                 <span class="menu-card-price">13,5€</span>
               </div>
               <div class="menu-card-desc" data-i18n="item.azteca.desc">180 gr. de carne Angus, queso
@@ -289,6 +293,13 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
             </article>
             <article class="card menu-card">
               <div class="menu-card-header">
+                <span class="menu-card-title" data-i18n="racion.tequenos.title">Tequeños</span>
+                <span class="menu-card-price">9,5€</span>
+              </div>
+              <div class="menu-card-desc" data-i18n="racion.tequenos.desc">8 ud, salsa variada</div>
+            </article>
+            <article class="card menu-card">
+              <div class="menu-card-header">
                 <span class="menu-card-title" data-i18n="racion.champis.title">Champis con gambas a la vinagreta</span>
                 <span class="menu-card-price">8,5€</span>
               </div>
@@ -314,6 +325,13 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
                 <span class="menu-card-price">7€</span>
               </div>
               <div class="menu-card-desc" data-i18n="racion.ganbara.desc">Patatas caseras, bacón crujiente y salsa cheddar</div>
+            </article>
+            <article class="card menu-card" data-image="Nachos_IA_gemini.png">
+              <div class="menu-card-header">
+                <span class="menu-card-title-wrapper"><span class="menu-card-title" data-i18n="racion.nachos.title">Nachos con carne picada</span><span class="spicy-icon" aria-label="Muy picante" title="Muy picante"><i class="fa-solid fa-pepper-hot" aria-hidden="true"></i><i class="fa-solid fa-pepper-hot" aria-hidden="true"></i></span></span>
+                <span class="menu-card-price">9,5€</span>
+              </div>
+              <div class="menu-card-desc" data-i18n="racion.nachos.desc">Nachos con carne picada, salsa Cheddar, guacamole y jalapeños.</div>
             </article>
           </div>
         </div>
@@ -547,17 +565,15 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: 320px;
-        max-width: 80vw;
-        opacity: 0.13;
+        width: clamp(380px, 55vw, 640px);
+        max-width: 92vw;
+        opacity: 0.14;
         z-index: 1;
         pointer-events: none;
         user-select: none;
       }
       @media (max-width: 600px) {
-        .logo-bg-hero {
-          width: 180px;
-        }
+        .logo-bg-hero { width: clamp(220px, 72vw, 360px); }
       }
       .hero-inner h1 {
         position: relative;
@@ -643,6 +659,37 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
       })();
     </script>
     <script>
+      // Add camera icon automatically to any card with data-image
+      (function(){
+        const cards = document.querySelectorAll('.menu-card[data-image]');
+        cards.forEach(card => {
+          const header = card.querySelector('.menu-card-header');
+          if(!header) return;
+          if(header.querySelector('.dish-photo-icon')) return; // already has icon
+          // Find or create a title wrapper
+          let wrapper = header.querySelector('.menu-card-title-wrapper');
+          if(!wrapper){
+            const titleEl = header.querySelector('.menu-card-title');
+            if(!titleEl) return;
+            wrapper = document.createElement('span');
+            wrapper.className = 'menu-card-title-wrapper';
+            titleEl.replaceWith(wrapper);
+            wrapper.appendChild(titleEl);
+          }
+          const icon = document.createElement('span');
+          icon.className = 'dish-photo-icon';
+          icon.setAttribute('aria-hidden','true');
+          const img = document.createElement('img');
+          img.src = 'cam.svg';
+          img.alt = '';
+          img.width = 24; img.height = 24;
+          img.loading = 'lazy'; img.decoding = 'async';
+          icon.appendChild(img);
+          wrapper.appendChild(icon);
+        });
+      })();
+    </script>
+    <script>
       // Mobile menu toggle (mejorado)
       (function(){
         // Mobile nav is persistent under the header now. Keep links functional and
@@ -677,6 +724,10 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
             'racion.pimientos.desc': 'Pimientos verdes',
             'racion.ganbara.title': 'Patatas Ganbara',
             'racion.ganbara.desc': 'Patatas caseras, bacón crujiente y salsa cheddar',
+            'racion.nachos.title': 'Nachos con carne picada',
+            'racion.nachos.desc': 'Nachos con carne picada, salsa Cheddar, guacamole y jalapeños.',
+            'racion.tequenos.title': 'Tequeños',
+            'racion.tequenos.desc': '8 ud, salsa variada',
             'nav.bocadillos': 'Bocadillos',
             'nav.inicio': 'Inicio',
             'nav.hamburguesas': 'Hamburguesas',
@@ -784,6 +835,10 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
             'racion.pimientos.desc': 'Piper berdeak',
             'racion.ganbara.title': 'Patatak Ganbara',
             'racion.ganbara.desc': 'Etxeko patatak, hirugiharra kurruskatua eta saltsa cheddar',
+            'racion.nachos.title': 'Nachos haragi xehatuarekin',
+            'racion.nachos.desc': 'Nachos haragi xehatua, Cheddar saltsa, guacamole eta jalapeñoekin.',
+            'racion.tequenos.title': 'Tequeñoak',
+            'racion.tequenos.desc': '8 ud, saltsa anitza',
             'nav.bocadillos': 'Ogitartekoak',
             'nav.inicio': 'Hasiera',
             'nav.hamburguesas': 'Hanburgesak',
