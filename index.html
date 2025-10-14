@@ -75,6 +75,15 @@
     </style>
   </head>
   <body>
+    <!-- Preloader Overlay -->
+    <div id="preloader" class="preloader" aria-live="polite" aria-label="Cargando imágenes" role="status">
+      <div class="preloader__inner">
+        <div class="preloader__logo">Ganbara</div>
+        <div class="preloader__bar"><div class="preloader__bar-fill" style="width:0%"></div></div>
+        <div class="preloader__text"><span class="preloader__count">0%</span> <span class="preloader__msg">Preparando imágenes…</span></div>
+        <noscript><div class="preloader__noscript">Activa JavaScript para la experiencia completa.</div></noscript>
+      </div>
+    </div>
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="#inicio">
@@ -589,6 +598,101 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
         <div class="footer-right"><small>Hecho con cariño • Todos los derechos reservados</small></div>
       </div>
     </footer>
+
+    <script>
+      // Preloader module: preloads all dish images referenced by data-image and any <img data-preload>
+      (function(){
+        if(document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+        function init(){
+        const OVERLAY_ID = 'preloader';
+        const preloaderEl = document.getElementById(OVERLAY_ID);
+        if(!preloaderEl) return; // safety
+        const barFill = preloaderEl.querySelector('.preloader__bar-fill');
+        const countEl = preloaderEl.querySelector('.preloader__count');
+        const msgEl = preloaderEl.querySelector('.preloader__msg');
+
+        // Collect candidate image URLs
+        function collectSources(){
+          const set = new Set();
+          // From data-image on menu cards
+            document.querySelectorAll('.menu-card[data-image]').forEach(card=>{
+              const src = card.getAttribute('data-image');
+              if(src) set.add(src.trim());
+            });
+          // From explicit <img data-preload>
+          document.querySelectorAll('img[data-preload]').forEach(img=>{
+            if(img.src) set.add(img.getAttribute('src').trim());
+          });
+          return Array.from(set);
+        }
+
+        const sources = collectSources();
+        let loaded = 0;
+        const total = sources.length;
+        let done = false;
+        const MIN_SHOW_TIME = 600; // ms: avoid flash if ultra fast
+        const HARD_TIMEOUT = 7000; // ms: safety to dismiss preloader
+        const startTime = performance.now();
+
+        function update(){
+          if(!barFill || !countEl) return;
+          const percent = total ? Math.round((loaded/total)*100) : 100;
+          barFill.style.width = percent + '%';
+          countEl.textContent = percent + '%';
+          if(msgEl){
+            if(percent < 40) msgEl.textContent = 'Preparando imágenes…';
+            else if(percent < 80) msgEl.textContent = 'Cargando contenido…';
+            else if(percent < 100) msgEl.textContent = 'Últimos retoques…';
+            else msgEl.textContent = 'Listo';
+          }
+        }
+
+        function finish(){
+          if(done) return; done = true;
+          update();
+          const elapsed = performance.now() - startTime;
+          const wait = Math.max(0, MIN_SHOW_TIME - elapsed);
+          setTimeout(()=>{
+            preloaderEl.classList.add('is-done');
+            // Fade out
+            preloaderEl.classList.add('is-fading');
+            // Remove from DOM after animation (fallback 1.2s)
+            setTimeout(()=>{ preloaderEl.remove(); }, 1200);
+          }, wait);
+        }
+
+        function handleOne(){
+          loaded++;
+          update();
+          if(loaded >= total){
+            finish();
+          }
+        }
+
+        if(!total){
+          // Nothing to preload
+          finish();
+          return;
+        }
+
+        // Kick off loads
+        sources.forEach(src => {
+          const img = new Image();
+          img.onload = handleOne;
+          img.onerror = handleOne; // still advance on error
+          img.src = src;
+        });
+        update();
+
+        // Hard timeout protection
+        setTimeout(()=>{ finish(); }, HARD_TIMEOUT);
+        }
+      })();
+    </script>
 
     <script>
       // Smooth scroll for internal links y efecto activo en menú
