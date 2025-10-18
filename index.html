@@ -155,12 +155,12 @@
           <p class="section-sub" data-i18n="section.hamburguesas.includes">Incluye patatas</p>
 
           <div class="grid cards">
-            <article class="card menu-card">
+            <article id="menu-ganbara-card" class="card menu-card">
               <div class="menu-card-header">
-                <span class="menu-card-title" data-i18n="item.ganbara.title">GANBARA</span>
-                <span class="menu-card-price">13,5€</span>
+                <span id="menu-ganbara-title" class="menu-card-title" data-i18n="item.ganbara.title">GANBARA</span>
+                <span id="menu-ganbara-price" class="menu-card-price">13,5€</span>
               </div>
-              <div class="menu-card-desc" data-i18n="item.ganbara.desc">180 gr. de carne Angus, lechuga, tomate, cebolla caramelizada, queso Idiazabal, doble de bacon, huevo.</div>
+              <div id="menu-ganbara-desc" class="menu-card-desc" data-i18n="item.ganbara.desc">180 gr. de carne Angus, lechuga, tomate, cebolla caramelizada, queso Idiazabal, doble de bacon, huevo.</div>
             </article>
             <article class="card menu-card">
               <div class="menu-card-header">
@@ -1179,5 +1179,79 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
   });
 })();
 </script>
+
+    <!-- Firebase App (modular) -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDx0gRozWjNPq9UAIP3n09yEKjNXSGZvlU",
+        authDomain: "carta-ganbara.firebaseapp.com",
+        projectId: "carta-ganbara",
+        storageBucket: "carta-ganbara.firebasestorage.app",
+        messagingSenderId: "489559202741",
+        appId: "1:489559202741:web:ef30ac3308e800c152d7fc"
+      };
+
+  // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Ejemplo: obtener y mostrar datos para la hamburguesa "Ganbara"
+      async function loadGanbara(){
+        try {
+          const ref = doc(db, 'menu', 'ganbara'); // colección "menu", documento "ganbara"
+          const snap = await getDoc(ref);
+          if (!snap.exists()) return; // no hay datos que mostrar
+          const data = snap.data() || {};
+
+          const titleEl = document.getElementById('menu-ganbara-title');
+          const priceEl = document.getElementById('menu-ganbara-price');
+          const descEl  = document.getElementById('menu-ganbara-desc');
+
+          if (titleEl && data.title) titleEl.textContent = data.title;
+          if (priceEl && data.price) priceEl.textContent = data.price;
+          if (descEl && data.desc) descEl.textContent = data.desc;
+        } catch (err) {
+          console.error('Error cargando Ganbara:', err);
+        }
+      }
+
+      // Llamada inicial
+      loadGanbara();
+
+      // === Obtener platos (colección 'platos') y actualizar la hamburguesa (por ahora 1 plato) ===
+      async function obtenerPlatos(){
+        try{
+          const snap = await getDocs(collection(db, 'platos'));
+          snap.forEach((d)=>{
+            const plato = d.data() || {};
+            // Mapear a los elementos existentes (Ganbara)
+            const imgElement = document.getElementById('hamburguesa-img'); // opcional si añades imagen
+            const nombreElement = document.getElementById('menu-ganbara-title');
+            const descElement = document.getElementById('menu-ganbara-desc');
+            const precioElement = document.getElementById('menu-ganbara-price');
+
+            if(imgElement && plato.imagenUrl) imgElement.src = plato.imagenUrl;
+            if(nombreElement && plato.nombre) nombreElement.textContent = plato.nombre;
+            if(descElement && plato.descripcion) descElement.textContent = plato.descripcion;
+            if(precioElement && (plato.precio !== undefined && plato.precio !== null)){
+              const valor = Number(plato.precio);
+              // Formato local, estilo del sitio: 13,50€
+              precioElement.textContent = `${valor.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€`;
+            }
+          });
+        } catch(err){
+          console.error('Error obteniendo platos:', err);
+        }
+      }
+      obtenerPlatos();
+    </script>
+
   </body>
 </html>
