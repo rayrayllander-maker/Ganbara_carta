@@ -145,7 +145,6 @@
           const DATA_URL = 'menu.json';
           let MENU_DATA = null;
           let CURRENT_LANG = 'es';
-          const OVERRIDE_KEY = 'menu_json_override';
 
           function el(html){
             const t = document.createElement('template');
@@ -186,31 +185,19 @@
             container.innerHTML = items.map(cardHTML).join('');
           }
 
-          function listImagesFromData(data){
-            try{
-              return ([])
-                .concat(data.hamburguesas||[])
-                .concat(data.chuletas||[])
-                .concat(data.raciones||[])
-                .concat(data.bocadillos||[])
-                .concat(data.postres||[])
-                .filter(x=>x && x.image)
-                .map(x=>x.image);
-            }catch{ return []; }
-          }
-
           async function ensureData(){
             if(MENU_DATA) return MENU_DATA;
             try{
-              // Prefer local override if present
-              const ov = localStorage.getItem(OVERRIDE_KEY);
-              if(ov){
-                MENU_DATA = JSON.parse(ov);
-              } else {
-                const res = await fetch(DATA_URL, {cache:'no-cache'});
-                MENU_DATA = await res.json();
-              }
-              window.__MENU_IMAGES__ = listImagesFromData(MENU_DATA);
+              const res = await fetch(DATA_URL, {cache:'no-cache'});
+              MENU_DATA = await res.json();
+              window.__MENU_IMAGES__ = ([])
+                .concat(MENU_DATA.hamburguesas||[])
+                .concat(MENU_DATA.chuletas||[])
+                .concat(MENU_DATA.raciones||[])
+                .concat(MENU_DATA.bocadillos||[])
+                .concat(MENU_DATA.postres||[])
+                .filter(x=>x && x.image)
+                .map(x=>x.image);
             }catch(e){
               console.warn('No se pudo cargar menu.json; usando HTML estático', e);
             }
@@ -228,18 +215,8 @@
             renderSection('postres', data.postres||[]);
           }
 
-          // expose for i18n hook and admin mode
+          // expose for i18n hook
           window.renderMenu = renderMenu;
-          window.menuDataGet = () => MENU_DATA;
-          window.menuDataSet = (next) => {
-            if(!next) return;
-            MENU_DATA = next;
-            // Update image list for preloader
-            window.__MENU_IMAGES__ = listImagesFromData(MENU_DATA);
-            try { localStorage.setItem(OVERRIDE_KEY, JSON.stringify(MENU_DATA)); } catch {}
-            renderMenu(CURRENT_LANG);
-          };
-          window.menuDataClearOverride = () => { localStorage.removeItem(OVERRIDE_KEY); };
 
           // initial render uses stored lang or document.lang
           const initialLang = (localStorage.getItem('ganbara_lang')) || (document.documentElement.lang || 'es');
@@ -706,95 +683,7 @@ bikoitza eta ezti-mostaza saltsa / 180 gr. de carne Angus, lechuga, tomate, ched
       </div>
     </footer>
 
-    <div id="admin-toolbar" class="admin-toolbar" hidden>
-      <button type="button" id="admin-edit">Editar menú</button>
-      <button type="button" id="admin-import">Importar JSON</button>
-      <button type="button" id="admin-export">Descargar JSON</button>
-      <button type="button" id="admin-clear">Borrar override</button>
-    </div>
-    <div id="admin-modal" class="admin-modal" hidden>
-      <div class="admin-modal__dialog">
-        <div class="admin-modal__header">
-          <strong>Editor de menú (JSON)</strong>
-          <button type="button" id="admin-close" aria-label="Cerrar">×</button>
-        </div>
-        <textarea id="admin-textarea" class="admin-textarea" spellcheck="false"></textarea>
-        <div class="admin-modal__actions">
-          <button type="button" id="admin-save">Guardar</button>
-        </div>
-      </div>
-    </div>
-
-
     <script>
-      // Admin UI for editing menu.json in-browser (no server). Enabled by ?admin=1
-      (function(){
-        const params = new URLSearchParams(location.search);
-        const enabled = params.get('admin') === '1' || localStorage.getItem('admin_mode') === '1';
-        if(!enabled) return;
-        localStorage.setItem('admin_mode','1');
-        const tb = document.getElementById('admin-toolbar');
-        const modal = document.getElementById('admin-modal');
-        const ta = document.getElementById('admin-textarea');
-        const btnEdit = document.getElementById('admin-edit');
-        const btnImport = document.getElementById('admin-import');
-        const btnExport = document.getElementById('admin-export');
-        const btnClear = document.getElementById('admin-clear');
-        const btnClose = document.getElementById('admin-close');
-        const btnSave = document.getElementById('admin-save');
-        if(tb) tb.hidden = false;
-
-        function openEditor(){
-          try{
-            const cur = window.menuDataGet ? window.menuDataGet() : null;
-            ta.value = JSON.stringify(cur || {}, null, 2);
-          }catch{ ta.value = '{}'; }
-          modal.hidden = false;
-        }
-        function closeEditor(){ modal.hidden = true; }
-
-        btnEdit && btnEdit.addEventListener('click', openEditor);
-        btnClose && btnClose.addEventListener('click', closeEditor);
-        btnSave && btnSave.addEventListener('click', () => {
-          try{
-            const parsed = JSON.parse(ta.value);
-            window.menuDataSet && window.menuDataSet(parsed);
-            alert('Menú guardado en este navegador (override).');
-            closeEditor();
-          }catch(e){ alert('JSON inválido: ' + e.message); }
-        });
-        btnClear && btnClear.addEventListener('click', () => {
-          window.menuDataClearOverride && window.menuDataClearOverride();
-          location.reload();
-        });
-        btnImport && btnImport.addEventListener('click', async () => {
-          const input = document.createElement('input');
-          input.type = 'file'; input.accept = 'application/json';
-          input.onchange = async () => {
-            const file = input.files && input.files[0];
-            if(!file) return;
-            const text = await file.text();
-            try{
-              const parsed = JSON.parse(text);
-              window.menuDataSet && window.menuDataSet(parsed);
-              alert('Importado y aplicado correctamente.');
-            }catch(e){ alert('JSON inválido: ' + e.message); }
-          };
-          input.click();
-        });
-        btnExport && btnExport.addEventListener('click', () => {
-          try{
-            const data = window.menuDataGet ? window.menuDataGet() : null;
-            const blob = new Blob([JSON.stringify(data || {}, null, 2)], {type:'application/json'});
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'menu.json';
-            a.click();
-            URL.revokeObjectURL(a.href);
-          }catch(e){ alert('No se pudo exportar: ' + e.message); }
-        });
-      })();
-    </script>
       // Preloader module: preloads all dish images referenced by data-image and any <img data-preload>
       (function(){
         if(document.readyState === 'loading'){

@@ -570,16 +570,3 @@ body.dish-lightbox-open{overflow:hidden;touch-action:none;}
   .preloader__bar-fill{ transition:none; }
   .preloader.is-fading{ animation:none; opacity:0; visibility:hidden; }
 }
-
-/* === Admin toolbar & modal (minimal) === */
-.admin-toolbar{position:fixed;bottom:16px;right:16px;display:flex;gap:8px;background:rgba(0,0,0,0.75);padding:8px 10px;border-radius:10px;z-index:20000}
-.admin-toolbar button{appearance:none;border:0;border-radius:6px;background:#d4a056;color:#111;font-weight:700;padding:6px 10px;cursor:pointer}
-.admin-toolbar button:hover{background:#b8863f;color:#fff}
-.admin-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;z-index:21000}
-.admin-modal__dialog{width:min(800px,92vw);background:#fff;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.35);display:flex;flex-direction:column;overflow:hidden}
-.admin-modal__header{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:#111;color:#fff}
-#admin-close{appearance:none;border:0;background:transparent;color:#fff;font-size:24px;cursor:pointer;line-height:1}
-.admin-textarea{width:100%;min-height:50vh;font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;font-size:13px;padding:12px;border:0;outline:none;resize:vertical}
-.admin-modal__actions{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;background:#f7f7f7}
-#admin-save{appearance:none;border:0;border-radius:6px;background:#111;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer}
-#admin-save:hover{background:#333}
