@@ -1,0 +1,125 @@
+backend:
+  name: git-gateway
+  branch: main # Cambia a "master" si tu repo lo usa
+
+media_folder: "uploads"       # Carpeta donde se guardan los ficheros subidos en el repo
+public_folder: "/uploads"     # Ruta pública para servir esos ficheros
+
+publish_mode: editorial_workflow # Opcional: flujo con borradores y revisiones
+locale: es
+
+collections:
+  - label: "Carta"
+    name: "carta"
+    files:
+      - label: "Menú completo"
+        name: "menu"
+        file: "menu.json"
+        format: "json"
+        fields:
+          - label: "Hamburguesas"
+            name: "hamburguesas"
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - label: "Título"
+                name: "title"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "string" }
+                  - { label: "EU", name: "eu", widget: "string", required: false }
+              - label: "Descripción"
+                name: "desc"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "text" }
+                  - { label: "EU", name: "eu", widget: "text", required: false }
+              - { label: "Precio", name: "price", widget: "string" }
+              - { label: "Imagen", name: "image", widget: "image", required: false }
+              - { label: "Picante (0-2)", name: "spicy", widget: "number", value_type: "int", min: 0, max: 2, default: 0 }
+
+          - label: "Chuletas"
+            name: "chuletas"
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - label: "Título"
+                name: "title"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "string" }
+                  - { label: "EU", name: "eu", widget: "string", required: false }
+              - label: "Descripción"
+                name: "desc"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "text" }
+                  - { label: "EU", name: "eu", widget: "text", required: false }
+              - { label: "Precio", name: "price", widget: "string" }
+              - { label: "Imagen", name: "image", widget: "image", required: false }
+              - { label: "Picante (0-2)", name: "spicy", widget: "number", value_type: "int", min: 0, max: 2, default: 0 }
+
+          - label: "Raciones"
+            name: "raciones"
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - label: "Título"
+                name: "title"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "string" }
+                  - { label: "EU", name: "eu", widget: "string", required: false }
+              - label: "Descripción"
+                name: "desc"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "text" }
+                  - { label: "EU", name: "eu", widget: "text", required: false }
+              - { label: "Precio", name: "price", widget: "string" }
+              - { label: "Imagen", name: "image", widget: "image", required: false }
+              - { label: "Picante (0-2)", name: "spicy", widget: "number", value_type: "int", min: 0, max: 2, default: 0 }
+
+          - label: "Bocadillos"
+            name: "bocadillos"
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - label: "Título"
+                name: "title"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "string" }
+                  - { label: "EU", name: "eu", widget: "string", required: false }
+              - label: "Descripción"
+                name: "desc"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "text" }
+                  - { label: "EU", name: "eu", widget: "text", required: false }
+              - { label: "Precio", name: "price", widget: "string" }
+              - { label: "Imagen", name: "image", widget: "image", required: false }
+
+          - label: "Postres"
+            name: "postres"
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - label: "Título"
+                name: "title"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "string" }
+                  - { label: "EU", name: "eu", widget: "string", required: false }
+              - label: "Descripción"
+                name: "desc"
+                widget: object
+                fields:
+                  - { label: "ES", name: "es", widget: "text" }
+                  - { label: "EU", name: "eu", widget: "text", required: false }
+              - { label: "Precio", name: "price", widget: "string" }
