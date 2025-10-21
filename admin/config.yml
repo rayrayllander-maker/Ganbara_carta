@@ -1,0 +1,15 @@
+backend:
+  name: git-gateway
+  branch: main # <-- Verifica que esta sea la rama principal de tu repositorio (puede ser 'master')
+
+collections:
+  - name: "prueba"
+    label: "Prueba de Edición"
+    files:
+      - file: "index.html" # <-- ATENCIÓN: Esto es temporal y MUY limitado
+        label: "Edición Simple de Index"
+        name: "index-test"
+        fields:
+          - label: "Título de la Web"
+            name: "title"
+            widget: "string"
