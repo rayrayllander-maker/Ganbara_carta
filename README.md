@@ -25,16 +25,15 @@ Este proyecto es una página estática para mostrar la carta de Ganbara. Los pla
 - La pantalla de carga precarga imágenes usadas en tarjetas y las que declara el renderer a partir de `_data/platos.json`.
 - Se cierra automáticamente con timeout de seguridad.
 
-## Mini CMS (Netlify CMS)
+## Mini CMS (opcional con Netlify CMS)
 
-- Carpeta `admin/` ya incluida (con `index.html` y `config.yml`).
+- Carpeta `admin/` ya incluida.
 - Para usarlo en producción con Netlify:
   1. Despliega este proyecto en Netlify.
-  2. En Site settings → Identity, activa Netlify Identity.
+  2. En Netlify, activa Identity y Git Gateway.
   3. En Identity → Settings → Services, habilita Git Gateway.
-  4. Invita un usuario (Invite user) y haz login desde `/admin/` del sitio desplegado.
-- El CMS edita el fichero `_data/platos.json` según `admin/config.yml` (backend `git-gateway`, rama `main`).
-- Firebase está deshabilitado; no se usa en este proyecto.
+  4. Crea un usuario (Invite user) y haz login desde `/admin/` del sitio desplegado.
+- El CMS editará el fichero `_data/platos.json` según `admin/config.yml`.
 
 ## Desarrollo local
 

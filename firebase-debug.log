@@ -1,0 +1,56 @@
+[debug] [2025-10-28T10:56:08.325Z] ----------------------------------------------------------------------
+[debug] [2025-10-28T10:56:08.337Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\rayll\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2025-10-28T10:56:08.338Z] CLI Version:   14.20.0
+[debug] [2025-10-28T10:56:08.339Z] Platform:      win32
+[debug] [2025-10-28T10:56:08.339Z] Node Version:  v22.20.0
+[debug] [2025-10-28T10:56:08.340Z] Time:          Tue Oct 28 2025 11:56:08 GMT+0100 (hora estándar de Europa central)
+[debug] [2025-10-28T10:56:08.341Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-10-28T10:56:08.349Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-10-28T10:56:08.988Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-10-28T10:56:08.988Z] > authorizing via signed-in user (rayrayllander@gmail.com)
+[debug] [2025-10-28T10:56:08.988Z] [iam] checking project carta-ganbara for permissions ["firebase.projects.get"]
+[debug] [2025-10-28T10:56:08.989Z] Checked if tokens are valid: false, expires at: 1761058942099
+[debug] [2025-10-28T10:56:08.989Z] Checked if tokens are valid: false, expires at: 1761058942099
+[debug] [2025-10-28T10:56:08.989Z] > refreshing access token with scopes: []
+[debug] [2025-10-28T10:56:08.991Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-10-28T10:56:08.992Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-10-28T10:56:09.153Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-10-28T10:56:09.153Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-10-28T10:56:09.165Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara:testIamPermissions [none]
+[debug] [2025-10-28T10:56:09.165Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara:testIamPermissions x-goog-quota-user=projects/carta-ganbara
+[debug] [2025-10-28T10:56:09.165Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-10-28T10:56:09.560Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-10-28T10:56:09.560Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-10-28T10:56:09.951Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara:testIamPermissions 200
+[debug] [2025-10-28T10:56:09.952Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2025-10-28T10:56:09.954Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:09.954Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:09.954Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/carta-ganbara/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2025-10-28T10:56:09.954Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/carta-ganbara/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/carta-ganbara
+[debug] [2025-10-28T10:56:10.900Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/carta-ganbara/services/cloudresourcemanager.googleapis.com 200
+[debug] [2025-10-28T10:56:10.900Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/carta-ganbara/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2025-10-28T10:56:10.909Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:10.909Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:10.910Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara [none]
+[debug] [2025-10-28T10:56:11.122Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara 200
+[debug] [2025-10-28T10:56:11.122Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/carta-ganbara {"projectNumber":"489559202741","projectId":"carta-ganbara","lifecycleState":"ACTIVE","name":"Carta-Ganbara","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-10-18T17:40:35.032364Z"}
+[info] 
+[info] === Serving from 'C:\Users\rayll\Documents\01_Proyecto Ganbara\01_Web_Ganbara_VScode\web_ganbara'...
+[info] 
+[debug] [2025-10-28T10:56:11.131Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:11.131Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:11.132Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/carta-ganbara/sites 
+[debug] [2025-10-28T10:56:12.119Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/carta-ganbara/sites 200
+[debug] [2025-10-28T10:56:12.119Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/carta-ganbara/sites {"sites":[{"name":"projects/carta-ganbara/sites/carta-ganbara","defaultUrl":"https://carta-ganbara.web.app","appId":"1:489559202741:web:ea58508dc44f9fbb52d7fc","type":"DEFAULT_SITE"}]}
+[debug] [2025-10-28T10:56:12.119Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:12.119Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:12.119Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/carta-ganbara/webApps/1:489559202741:web:ea58508dc44f9fbb52d7fc/config [none]
+[debug] [2025-10-28T10:56:12.938Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/carta-ganbara/webApps/1:489559202741:web:ea58508dc44f9fbb52d7fc/config 200
+[debug] [2025-10-28T10:56:12.939Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/carta-ganbara/webApps/1:489559202741:web:ea58508dc44f9fbb52d7fc/config {"projectId":"carta-ganbara","appId":"1:489559202741:web:ea58508dc44f9fbb52d7fc","storageBucket":"carta-ganbara.firebasestorage.app","apiKey":"AIzaSyDx0gRozWjNPq9UAIP3n09yEKjNXSGZvlU","authDomain":"carta-ganbara.firebaseapp.com","messagingSenderId":"489559202741","projectNumber":"489559202741","version":"2"}
+[debug] [2025-10-28T10:56:12.948Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:12.949Z] Checked if tokens are valid: true, expires at: 1761652568154
+[debug] [2025-10-28T10:56:12.949Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/carta-ganbara [none]
+[debug] [2025-10-28T10:56:13.208Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/carta-ganbara 200
+[debug] [2025-10-28T10:56:13.208Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/carta-ganbara {"projectId":"carta-ganbara","projectNumber":"489559202741","displayName":"Carta-Ganbara","name":"projects/carta-ganbara","resources":{"hostingSite":"carta-ganbara"},"state":"ACTIVE","etag":"1_44778caf-8fce-4f08-8f1f-b407d912c3bf"}
+[info] +  hosting[carta-ganbara]: Local server: http://localhost:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://localhost:5000\u001b[22m\u001b[24m"}}

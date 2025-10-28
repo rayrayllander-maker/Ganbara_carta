@@ -143,6 +143,7 @@
         // Menu renderer from external JSON (_data/platos.json)
         (function(){
           const DATA_URL = '_data/platos.json';
+          const FS_REST_URL = 'https://firestore.googleapis.com/v1/projects/carta-ganbara/databases/(default)/documents/menu/platos';
           let MENU_DATA = null;
           let CURRENT_LANG = 'es';
 
@@ -188,9 +189,21 @@
           async function ensureData(){
             if(MENU_DATA) return MENU_DATA;
             try{
-              // Carga sólo desde el archivo local
-              const res = await fetch(DATA_URL, {cache:'no-cache'});
-              if(res.ok) MENU_DATA = await res.json();
+              // 1) Try Firestore REST (if document exists and readable)
+              try {
+                const fres = await fetch(FS_REST_URL, {cache:'no-cache'});
+                if (fres.ok) {
+                  const fjson = await fres.json();
+                  if (fjson && fjson.fields && fjson.fields.json && fjson.fields.json.stringValue) {
+                    MENU_DATA = JSON.parse(fjson.fields.json.stringValue);
+                  }
+                }
+              } catch(_){}
+              // 2) Fallback to local file
+              if(!MENU_DATA){
+                const res = await fetch(DATA_URL, {cache:'no-cache'});
+                if(res.ok) MENU_DATA = await res.json();
+              }
               window.__MENU_IMAGES__ = ([])
                 .concat(MENU_DATA.hamburguesas||[])
                 .concat(MENU_DATA.chuletas||[])
@@ -933,11 +946,9 @@
   // (Eliminado: manejado por script unificado de scroll suave)
 </script>
 <script>
-// Lightbox (reinsertado) para mostrar imagen al clicar nombre de la hamburguesa
+// Lightbox para mostrar imagen al clicar nombre de la hamburguesa
 (function(){
   const CARD_SELECTOR = '.menu-card[data-image]';
-  const cards = document.querySelectorAll(CARD_SELECTOR);
-  if(!cards.length) return; // Nada que hacer
   // Evitar duplicar si ya existe
   if(document.querySelector('.dish-lightbox')) return;
   const modal = document.createElement('div');
