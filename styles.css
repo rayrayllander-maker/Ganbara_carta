@@ -49,6 +49,44 @@
   gap: 28px 32px;
 }
 
+/* Skeleton placeholders to reserve space before data loads (reduces CLS) */
+.card--placeholder {
+  position: relative;
+  overflow: hidden;
+  min-height: 140px;
+  border-radius: 12px;
+  background: #f2f2f2;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04);
+  padding: 22px 24px;
+}
+.card--placeholder span {
+  display: block;
+  height: 16px;
+  background: rgba(0,0,0,0.07);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.card--placeholder span:nth-child(1) { width: 65%; height: 20px; }
+.card--placeholder span:nth-child(2) { width: 92%; }
+.card--placeholder span:nth-child(3) { width: 78%; margin-bottom: 18px; }
+.card--placeholder span:nth-child(4) { width: 42%; height: 18px; }
+.card--placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 90%);
+  transform: translateX(-100%);
+  animation: placeholderShimmer 1.2s linear infinite;
+}
+
+@keyframes placeholderShimmer {
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card--placeholder::after { animation: none; }
+}
+
 /* Cards that include an image for the dish */
 .menu-with-image {
   display: flex;
