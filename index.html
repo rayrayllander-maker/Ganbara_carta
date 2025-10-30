@@ -136,7 +136,7 @@
           </a>
         </div>
       </div>
-    </header>
+    </header> 
 
     <main>
       <script>
@@ -147,6 +147,39 @@
           const FS_REST_URL = 'https://firestore.googleapis.com/v1/projects/carta-ganbara/databases/(default)/documents/menu/platos';
           let MENU_DATA = null;
           let CURRENT_LANG = 'es';
+          // Lightweight debug info to help diagnose data loading in dev/prod
+          const DEBUG_INFO = { attempts: [], source: null, ok: false, counts: null, lang: null };
+          function shouldShowDebug(){
+            return /[?&]debug(=1)?/i.test(location.search) || localStorage.getItem('ganbara_debug') === '1';
+          }
+          function showDebugPanel(){
+            const old = document.getElementById('debug-panel'); if(old) old.remove();
+            const box = document.createElement('div');
+            box.id = 'debug-panel';
+            box.style.cssText = 'position:fixed;right:10px;bottom:10px;max-width:360px;background:#111;color:#fff;padding:10px 12px;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.28);font:12px/1.35 system-ui,Segoe UI,Roboto,sans-serif;z-index:99999;opacity:0.95';
+            const pre = document.createElement('pre');
+            pre.style.cssText = 'white-space:pre-wrap;margin:0;max-height:40vh;overflow:auto';
+            const info = Object.assign({}, DEBUG_INFO, { images: Array.isArray(window.__MENU_IMAGES__) ? window.__MENU_IMAGES__.length : 0 });
+            pre.textContent = JSON.stringify(info, null, 2);
+            const row = document.createElement('div');
+            row.style.cssText = 'display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:6px';
+            const title = document.createElement('strong');
+            title.textContent = 'Debug';
+            const btns = document.createElement('div');
+            const close = document.createElement('button');
+            close.textContent = '×'; close.title = 'Cerrar';
+            close.style.cssText = 'border:0;background:#333;color:#fff;border-radius:6px;width:24px;height:24px;cursor:pointer';
+            close.onclick = ()=> box.remove();
+            const pin = document.createElement('button');
+            pin.textContent = localStorage.getItem('ganbara_debug')==='1' ? 'Unpin' : 'Pin';
+            pin.style.cssText = 'border:0;background:#444;color:#fff;border-radius:6px;padding:4px 8px;cursor:pointer';
+            pin.onclick = ()=>{ const on = localStorage.getItem('ganbara_debug')==='1'; localStorage.setItem('ganbara_debug', on?'0':'1'); pin.textContent = on?'Pin':'Unpin'; };
+            btns.appendChild(pin); btns.appendChild(close);
+            row.appendChild(title); row.appendChild(btns);
+            box.appendChild(row);
+            box.appendChild(pre);
+            document.body.appendChild(box);
+          }
 
           function el(html){
             const t = document.createElement('template');
@@ -193,10 +226,13 @@
               // 1) Try Firestore REST (if document exists and readable)
               try {
                 const fres = await fetch(FS_REST_URL, {cache:'no-cache'});
+                DEBUG_INFO.attempts.push({ type:'firestore', ok: fres.ok, status: fres.status });
                 if (fres.ok) {
                   const fjson = await fres.json();
                   if (fjson && fjson.fields && fjson.fields.json && fjson.fields.json.stringValue) {
                     MENU_DATA = JSON.parse(fjson.fields.json.stringValue);
+                    DEBUG_INFO.source = 'firestore';
+                    DEBUG_INFO.ok = true;
                   }
                 }
               } catch(_){}
@@ -205,7 +241,8 @@
                 for(const url of DATA_URLS){
                   try{
                     const res = await fetch(url, {cache:'no-cache'});
-                    if(res.ok){ MENU_DATA = await res.json(); break; }
+                    DEBUG_INFO.attempts.push({ type:'local', url, ok: res.ok, status: res.status });
+                    if(res.ok){ MENU_DATA = await res.json(); DEBUG_INFO.source = url; DEBUG_INFO.ok = true; break; }
                   }catch(_){ /* ignore and try next */ }
                 }
               }
@@ -219,11 +256,23 @@
                   .concat(MENU_DATA.postres||[])
                   .filter(x=>x && x.image)
                   .map(x=>x.image);
+                DEBUG_INFO.counts = {
+                  hamburguesas: (MENU_DATA.hamburguesas||[]).length,
+                  chuletas: (MENU_DATA.chuletas||[]).length,
+                  raciones: (MENU_DATA.raciones||[]).length,
+                  bocadillos: (MENU_DATA.bocadillos||[]).length,
+                  postres: (MENU_DATA.postres||[]).length
+                };
               }
               // Avisar a quien espere por las imágenes del menú
               try { document.dispatchEvent(new CustomEvent('menu-data-ready', { detail: { images: window.__MENU_IMAGES__ } })); } catch(_) {}
             }catch(e){
               console.warn('No se pudo cargar platos.json; usando HTML estático', e);
+            }
+            DEBUG_INFO.lang = CURRENT_LANG;
+            window.__DEBUG_INFO__ = DEBUG_INFO;
+            if(shouldShowDebug()){
+              try { showDebugPanel(); } catch(_) {}
             }
             return MENU_DATA;
           }
@@ -254,7 +303,7 @@
       </script>
       <section id="inicio" class="hero">
         <div class="container hero-inner" style="position:relative;">
-          <img src="Logo_color_ganbara.png" alt="" class="logo-bg-hero" width="320" height="320" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="Logo_color_ganbara.png" alt="" class="logo-bg-hero" width="320" height="320" loading="eager" decoding="async" aria-hidden="true">
           <h1 data-i18n="hero.title" style="position:relative; z-index:2;">Ganbara</h1>
           <p class="lead" data-i18n="hero.lead">Sabor a nuestra tierra. Ingredientes locales y recetas con carácter.</p>
           <a class="cta" href="#hamburguesas" data-i18n="hero.cta">Ver la carta</a>
@@ -421,15 +470,24 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: clamp(380px, 55vw, 640px);
+        /* Tamaño base más contenido para evitar escalado excesivo */
+        width: clamp(260px, 42vw, 480px);
         max-width: 92vw;
-        opacity: 0.14;
+        opacity: 0.16; /* un poco más visible en general */
         z-index: 1;
         pointer-events: none;
         user-select: none;
+        image-rendering: auto;
       }
       @media (max-width: 600px) {
         .logo-bg-hero { width: clamp(220px, 72vw, 360px); }
+      }
+      /* Versión PC: tamaño refinado y menos transparencia (más visible) */
+      @media (min-width: 1024px) {
+        .logo-bg-hero {
+          width: clamp(320px, 28vw, 460px);
+          opacity: 0.24; /* disminuye la transparencia en desktop */
+        }
       }
       .hero-inner h1 {
         position: relative;

@@ -1,1 +1,0 @@
-// Archivo retirado. No se usa en producción.
