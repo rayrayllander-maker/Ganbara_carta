@@ -49,6 +49,15 @@
   gap: 28px 32px;
 }
 
+html[lang="eu"] .grid.cards {
+  justify-content: center;
+  justify-items: center;
+}
+
+html[lang="eu"] .grid.cards > * {
+  margin-inline: auto;
+}
+
 /* Skeleton placeholders to reserve space before data loads (reduces CLS) */
 .card--placeholder {
   position: relative;
