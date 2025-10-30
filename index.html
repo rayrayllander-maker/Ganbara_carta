@@ -142,8 +142,8 @@
       <script>
         // Menu renderer from external JSON (data/platos.json)
         (function(){
-          // Try multiple locations to be resilient on GitHub Pages
-          const DATA_URLS = ['_data/platos.json', 'data/platos.json'];
+          // Try multiple locations; prefer root for simplicity on GitHub Pages
+          const DATA_URLS = ['platos.json', 'data/platos.json', '_data/platos.json'];
           const FS_REST_URL = 'https://firestore.googleapis.com/v1/projects/carta-ganbara/databases/(default)/documents/menu/platos';
           let MENU_DATA = null;
           let CURRENT_LANG = 'es';
@@ -223,7 +223,7 @@
               // Avisar a quien espere por las imágenes del menú
               try { document.dispatchEvent(new CustomEvent('menu-data-ready', { detail: { images: window.__MENU_IMAGES__ } })); } catch(_) {}
             }catch(e){
-              console.warn('No se pudo cargar data/platos.json; usando HTML estático', e);
+              console.warn('No se pudo cargar platos.json; usando HTML estático', e);
             }
             return MENU_DATA;
           }

@@ -4,7 +4,8 @@ Este proyecto es una página estática para mostrar la carta de Ganbara. Los pla
 
 ## ¿Cómo edito los platos?
 
-- Archivo fuente: `data/platos.json` (única fuente de verdad). Antes estaba en `_data/`; se ha movido para compatibilidad con GitHub Pages.
+- Archivo fuente: `platos.json` en la raíz del proyecto (única fuente de verdad).
+- Fallbacks soportados por el código: `data/platos.json` y `_data/platos.json` (por compatibilidad). No hace falta mantenerlos si ya usas `platos.json`.
 - Estructura por secciones: `hamburguesas`, `chuletas`, `raciones`, `bocadillos`, `postres`.
 - Cada elemento suele tener:
   - `title`: objeto con `es` y `eu`.
@@ -22,30 +23,24 @@ Este proyecto es una página estática para mostrar la carta de Ganbara. Los pla
 
 ## Preloader
 
-- La pantalla de carga precarga imágenes usadas en tarjetas y las que declara el renderer a partir de `_data/platos.json`.
+- La pantalla de carga precarga imágenes referenciadas en los datos del menú (independientemente de si vienen de `platos.json`, `data/platos.json` o `_data/platos.json`).
 - Se cierra automáticamente con timeout de seguridad.
 
-## Mini CMS (opcional con Netlify CMS)
+## Edición de datos
 
-- Carpeta `admin/` ya incluida.
-- Para usarlo en producción con Netlify:
-  1. Despliega este proyecto en Netlify.
-  2. En Netlify, activa Identity y Git Gateway.
-  3. En Identity → Settings → Services, habilita Git Gateway.
-  4. Crea un usuario (Invite user) y haz login desde `/admin/` del sitio desplegado.
-- El CMS editará el fichero `_data/platos.json` según `admin/config.yml`.
+Este proyecto no usa ya un CMS ni Firebase. Edita directamente `platos.json` (en la raíz) y sube los cambios.
 
 ## Desarrollo local
 
-- Abre `index.html` en un servidor local (para que `fetch('_data/platos.json')` funcione).
+- Abre `index.html` en un servidor local (para que `fetch('platos.json')` funcione sin restricciones del navegador al leer ficheros locales).
 - En VS Code puedes usar la extensión "Live Server" o cualquier servidor estático.
 
 ## Despliegue en GitHub Pages
 
 GitHub Pages usa Jekyll por defecto y no publica carpetas que empiezan por `_`. Para evitar problemas:
 
-- Este repo ya usa `data/platos.json` (sin guion bajo) y además incluye `.nojekyll` por si publicas desde otra carpeta.
-- Si migras desde una versión antigua que usaba `_data/platos.json`, el código intenta ambas rutas.
+- Este repo usa `platos.json` en la raíz y además incluye `.nojekyll` por seguridad.
+- Si migras desde una versión antigua que usaba `_data/platos.json` o `data/platos.json`, el código intentará esas rutas como fallback.
 
 Tras hacer push a la rama publicada por Pages, espera ~1–2 minutos y recarga con Ctrl+F5.
 
@@ -56,5 +51,5 @@ Tras hacer push a la rama publicada por Pages, espera ~1–2 minutos y recarga c
 
 ## Notas
 
-- Archivo legado `menu.json` ha sido eliminado. Usa siempre `_data/platos.json`.
+- Archivos legados como scripts o CSV de inventario han sido retirados. Usa siempre `platos.json`.
 - Si algo no carga, revisa la consola del navegador: pueden aparecer errores de ruta en imágenes.
