@@ -236,8 +236,8 @@ body{padding-top:var(--header-height)}
   body{padding-top:calc(var(--header-height) + var(--mobile-nav-height))}
 }
 
-.main-nav{display:flex;gap:14px}
-.main-nav a{color:#fff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:10px;background:rgba(0,0,0,0.15);line-height:1.1;font-size:.95rem}
+.main-nav{display:flex;gap:10px;flex:1;justify-content:center}
+.main-nav a{color:#fff;text-decoration:none;font-weight:700;padding:8px 12px;border-radius:10px;background:rgba(0,0,0,0.15);line-height:1.1;font-size:.95rem}
 .main-nav a:hover{background:rgba(0,0,0,0.25)}
 
 /* CTA-style nav button for desktop */
