@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "hamburguesas": [
+    { "id": "ganbara", "title": { "es": "GANBARA", "eu": "GANBARA" }, "desc": { "es": "180 gr. de carne Angus, lechuga, tomate, cebolla caramelizada, queso Idiazabal, doble de bacon y huevo.", "eu": "180 gr. Angus haragia, letxuga, tomatea, karamelizatutako tipula, Idiazabal gazta, doble bacon eta arrautza." }, "price": "13,5€", "spicy": 0 },
+    { "id": "golosa", "title": { "es": "GOLOSA", "eu": "GOLOSA" }, "desc": { "es": "180 gr. de carne Angus, lechuga, tomate, cebolla, queso cheddar, doble de bacon y salsa miel-mostaza.", "eu": "180 gr. Angus haragia, letxuga, tomatea, tipula, cheddar gazta, hirugiharra bikoitza eta ezti-mostaza saltsa." }, "price": "13€", "spicy": 0 },
+    { "id": "francesa", "title": { "es": "FRANCESA", "eu": "FRANCESA" }, "desc": { "es": "180 gr. de carne Angus, doble de bacon, cebolla, champis laminados y queso Camembert.", "eu": "Hirugiharra bikoitza, tipula, txanpiak eta Camembert gazta." }, "price": "13€", "spicy": 0 },
+    { "id": "serrana", "title": { "es": "SERRANA", "eu": "SERRANA" }, "desc": { "es": "180 gr. de carne Angus, queso danés, cebolla morada, jamón, hilos de patata y salsa tártara.", "eu": "180 gr. Angus haragia, gazta daniarra, tipula morea, urdaiazpikoa, patata hariak eta tartaro saltsa." }, "price": "13€", "spicy": 0 },
+    { "id": "emmy", "title": { "es": "EMMY", "eu": "EMMY" }, "desc": { "es": "180 gr. de carne Angus, queso cheddar, doble de bacon, cebolla caramelizada, pepinillos, huevo y salsa Emmy.", "eu": "180 gr. Angus haragia, cheddar gazta, hirugiharra bikoitza, tipula karamelizatua, pepinilloak, arrautza eta Emmy saltsa." }, "price": "13,5€", "spicy": 1 },
+    { "id": "colombiana", "title": { "es": "COLOMBIANA", "eu": "KOLOMBIARRA" }, "desc": { "es": "180 gr. de carne Angus, queso cheddar, hilos de patata, 70 gr. de carne mechada y salsa de piña.", "eu": "180 gr. Angus haragia, cheddar gazta, patata hariak, 70 gr. haragi xehatua eta anana saltsa." }, "price": "14,5€", "image": "colombiana.png", "spicy": 0 },
+    { "id": "baconessa", "title": { "es": "BACONESSA", "eu": "BACONESSA" }, "desc": { "es": "180 gr. de carne Angus, doble de queso danés, doble de bacon, bacon crispy, cebolla crispy, huevo y salsa Baconessa.", "eu": "180 gr. Angus haragia, gazta daniarra bikoitza, hirugiharra bikoitza, hirugihar kurruskaria, tipula kurruskaria, arrautza eta Baconessa saltsa." }, "price": "14€", "spicy": 0 },
+    { "id": "bbq", "title": { "es": "BBQ", "eu": "BBQ" }, "desc": { "es": "180 gr. de carne Angus, doble de queso danés, doble de bacon, chaskis y salsa Barbacoa.", "eu": "180 gr. Angus haragia, hirugihar bikoitza, gazta daniarra, tipula, chaskis eta barbakoa saltsa." }, "price": "13€", "spicy": 0 },
+    { "id": "azteca", "title": { "es": "AZTECA", "eu": "AZTEKA" }, "desc": { "es": "180 gr. de carne Angus, queso cheddar, cebolla crispy, jalapeño, guacamole, nachos y salsa de jalapeño asado.", "eu": "180 gr. Angus haragia, cheddar gazta, tipula kurruskaria, jalapeñoak, guacamolea, natxoak eta jalapeño errea saltsa." }, "price": "13,5€", "spicy": 2 },
+    { "id": "clasica", "title": { "es": "CLÁSICA", "eu": "KLASIKOA" }, "desc": { "es": "180 gr. de carne Angus, queso cheddar, doble de bacon, pepinillo y salsa Burger.", "eu": "180 gr. Angus haragia, cheddar gazta, hirugiharra bikoitza, pepinilloa eta Burger saltsa." }, "price": "12,5€", "spicy": 0 },
+    { "id": "vegetariana", "title": { "es": "VEGETARIANA", "eu": "BEGETARIANA" }, "desc": { "es": "Carne vegetal, lechuga, tomate, cebolla morada, huevo y queso cheddar.", "eu": "Eura haragia, letxuga, tomatea, tipula morea, arrautza eta cheddar gazta." }, "price": "12,5€", "spicy": 0 }
+  ],
+  "chuletas": [
+    { "id": "ganbara_turbo", "title": { "es": "GANBARA TURBO", "eu": "GANBARA TURBO" }, "desc": { "es": "200 gr. de carne de chuleta, queso cheddar, cebolla caramelizada, doble de bacón, 70 gr. de carne mechada y salsa guasacaca.", "eu": "200 gr. txuleta haragia, cheddar gazta, tipula karamelizatua, hirugiharra bikoitza, 70 gr. haragi xehatua eta guasacaca saltsa." }, "price": "15€", "image": "ganbaraturbo.png", "spicy": 0 },
+    { "id": "euskalduna", "title": { "es": "EUSKALDUNA", "eu": "EUSKALDUNA" }, "desc": { "es": "200 gr. de carne de chuleta, queso Idiazabal, doble de bacón y huevo.", "eu": "200 gr. txuleta haragia, Idiazabal gazta, hirugiharra bikoitza eta arrautza." }, "price": "14,5€", "spicy": 0 }
+  ],
+  "raciones": [
+    { "id": "jamon", "title": {"es":"Paletilla de jamón ibérico","eu":"Urdaiazpiko iberikoa"}, "desc": {"es":"Paletilla de jamón ibérico","eu":"Urdaiazpiko iberikoa"}, "price": "17€ / 9€", "spicy": 0 },
+    { "id": "rabas", "title": {"es":"Rabas","eu":"Rabak"}, "desc": {"es":"Rabas","eu":"Rabak"}, "price": "9,5€ / 5,5€", "spicy": 0 },
+    { "id": "rabas_alioli", "title": {"es":"Rabas, cebolla crujiente y alioli","eu":"Rabak, tipula kurruskatua eta aioli"}, "desc": {"es":"Rabas, cebolla crujiente y alioli","eu":"Rabak, tipula kurruskatua eta aioli"}, "price": "9,5€", "spicy": 0 },
+    { "id": "patatas", "title": {"es":"Patata casera","eu":"Etxeko patatak"}, "desc": {"es":"Brava y alioli (6€) / Bravioi (7€)", "eu":"Brava eta aioli (6€) / Bravioi (7€)"}, "price": "6€ / 7€", "spicy": 0 },
+    { "id": "croquetas", "title": {"es":"Croquetas de jamón o de hongos","eu":"Urdaiazpiko edo Ondo-kroketak"}, "desc": {"es":"Croquetas de jamón o de hongos","eu":"Urdaiazpiko edo Ondo-kroketak"}, "price": "9,5€", "spicy": 0 },
+    { "id": "tequenos", "title": {"es":"Tequeños","eu":"Tequeñoak"}, "desc": {"es":"8 ud, salsa variada","eu":"8 ud, saltsa anitza"}, "price": "9,5€", "spicy": 0 },
+    { "id": "champis", "title": {"es":"Champis con gambas a la vinagreta","eu":"Txanpiak ganbekin azpin-oliotan"}, "desc": {"es":"Champis con gambas a la vinagreta","eu":"Txanpiak ganbekin azpin-oliotan"}, "price": "8,5€", "spicy": 0 },
+    { "id": "pollo", "title": {"es":"Piezas de pollo crujiente con patatas","eu":"Oilasko kurruskaria patatekin"}, "desc": {"es":"Piezas de pollo crujiente con patatas","eu":"Oilasko kurruskaria patatekin"}, "price": "9,5€", "spicy": 0 },
+    { "id": "pimientos", "title": {"es":"Pimientos verdes","eu":"Piper berdeak"}, "desc": {"es":"Pimientos verdes","eu":"Piper berdeak"}, "price": "8,5€", "spicy": 0 },
+    { "id": "patatas_ganbara", "title": {"es":"Patatas Ganbara","eu":"Patatak Ganbara"}, "desc": {"es":"Patatas caseras, bacón crujiente y salsa cheddar","eu":"Etxeko patatak, hirugiharra kurruskatua eta saltsa cheddar"}, "price": "7€", "spicy": 0 },
+    { "id": "nachos", "title": {"es":"Nachos con carne picada","eu":"Nachos haragi xehatuarekin"}, "desc": {"es":"Nachos con carne picada, salsa Cheddar, guacamole y jalapeños.", "eu":"Nachos haragi xehatua, Cheddar saltsa, guacamole eta jalapeñoekin."}, "price": "9,5€", "image": "Nachos_IA_gemini.png", "spicy": 2 }
+  ],
+  "bocadillos": [
+    { "id": "b1", "title": {"es":"Vegetal de pollo","eu":"Oilasko begetala"}, "desc": {"es":"Pechuga, Lechuga, tomate, york, queso, mayonesa, atún y huevo cocido","eu":"Paparra, letxuga, tomatea, york, gazta, maionesa, hegaluzea eta arrautza egosia"}, "price": "7,5€" },
+    { "id": "b2", "title": {"es":"Tortillas variadas","eu":"Tortilla ezberdinak"}, "desc": {"es":"Chorizo, patata, jamón o champis","eu":"Txorizoa, patata, urdaiazpikoa edo txanpiak"}, "price": "6,5€" },
+    { "id": "b3", "title": {"es":"Bacón, queso y pimientos","eu":"Hirugiharra, gazta eta piperrak"}, "desc": {"es":"Bacón, queso y pimientos","eu":"Hirugiharra, gazta eta piperrak"}, "price": "7€" },
+    { "id": "b4", "title": {"es":"Lomo, queso y pimientos","eu":"Solomo, gazta eta piperrak"}, "desc": {"es":"Lomo, queso y pimientos","eu":"Solomo, gazta eta piperrak"}, "price": "7€" },
+    { "id": "b5", "title": {"es":"Pechuga, queso y pimientos","eu":"Paparra, gazta eta piperrak"}, "desc": {"es":"Pechuga, queso y pimientos","eu":"Paparra, gazta eta piperrak"}, "price": "7€" },
+    { "id": "b6", "title": {"es":"Pechuga rebozada con alioli, bacón y cebolla","eu":"Paparra errebozatua alioli, hirugiharra eta tipularekin"}, "desc": {"es":"Pechuga rebozada, alioli, bacón y cebolla","eu":"Paparra errebozatua, alioli, hirugiharra eta tipula"}, "price": "7,5€" },
+    { "id": "b7", "title": {"es":"Jamón ibérico, queso, setas y tomate a la plancha","eu":"Urdaiazpiko iberikoa, gazta, perretxikoak eta tomatea plantxan"}, "desc": {"es":"Jamón ibérico, queso, setas y rodajas de tomate a la plancha","eu":"Urdaiazpiko iberikoa, gazta, perretxikoak eta tomatea plantxan"}, "price": "8€" },
+    { "id": "b8", "title": {"es":"Jamón ibérico","eu":"Urdaiazpiko iberikoa"}, "desc": {"es":"Jamón ibérico","eu":"Urdaiazpiko iberikoa"}, "price": "7€" },
+    { "id": "b9", "title": {"es":"Especial","eu":"Berezia"}, "desc": {"es":"Jamón, pimientos verdes, queso Idiazabal y setas","eu":"Urdaiazpiko, piper berdeak, Idiazabal gazta eta perretxikoak"}, "price": "8€" },
+    { "id": "b10", "title": {"es":"Pechuga crujiente con mermelada y queso Camembert","eu":"Paparra kurruskaria, marmelada eta Camembert gazta"}, "desc": {"es":"Pechuga crujiente, mermelada y queso Camembert","eu":"Paparra kurruskaria, marmelada eta Camembert gazta"}, "price": "7,5€" },
+    { "id": "b11", "title": {"es":"Vegetariana","eu":"Begetarianoa"}, "desc": {"es":"Calabacín, pimientos verdes, cebolla morada, tomate, guacamole, huevo y queso danés","eu":"Kalabazina, piper berdeak, tipula morea, tomatea, guacamolea, arrautza eta gazta daniarra"}, "price": "7€" }
+  ],
+  "postres": [
+    { "id": "tarta_queso", "title": {"es":"Tarta de queso","eu":"Gazta tarta"}, "desc": {"es":"Tarta de queso","eu":"Gazta tarta"}, "price": "5€" },
+    { "id": "coulant", "title": {"es":"Coulant de chocolate","eu":"Txokolatezko coulant-a"}, "desc": {"es":"Coulant de chocolate","eu":"Txokolatezko coulant-a"}, "price": "5€" }
+  ]
+}
