@@ -40,6 +40,17 @@ Este proyecto es una página estática para mostrar la carta de Ganbara. Los pla
 - Abre `index.html` en un servidor local (para que `fetch('_data/platos.json')` funcione).
 - En VS Code puedes usar la extensión "Live Server" o cualquier servidor estático.
 
+## Despliegue en GitHub Pages
+
+GitHub Pages usa Jekyll por defecto y no publica carpetas que comienzan por guion bajo (como `_data/`).
+
+Para que la página funcione y se pueda descargar `_data/platos.json`:
+
+- Incluye un archivo vacío llamado `.nojekyll` en la raíz del proyecto (ya añadido en este repo).
+- Alternativa: renombra la carpeta a `data/` y actualiza las rutas en el código (`const DATA_URL = 'data/platos.json'`).
+
+Después de hacer push a la rama publicada por Pages, espera ~1–2 minutos a que se regenere el sitio y recarga con Ctrl+F5.
+
 ### Sugerencias de estructura de imágenes
 
 - Coloca las imágenes de platos en la raíz o en una carpeta tipo `img/` y referencia la ruta en el campo `image`.

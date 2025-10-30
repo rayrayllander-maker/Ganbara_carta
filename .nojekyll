@@ -1,0 +1,2 @@
+# This file disables Jekyll on GitHub Pages so files and folders starting
+# with an underscore (like _data/platos.json) are served as-is.
