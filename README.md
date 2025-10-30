@@ -4,7 +4,7 @@ Este proyecto es una página estática para mostrar la carta de Ganbara. Los pla
 
 ## ¿Cómo edito los platos?
 
-- Archivo fuente: `_data/platos.json` (única fuente de verdad).
+- Archivo fuente: `data/platos.json` (única fuente de verdad). Antes estaba en `_data/`; se ha movido para compatibilidad con GitHub Pages.
 - Estructura por secciones: `hamburguesas`, `chuletas`, `raciones`, `bocadillos`, `postres`.
 - Cada elemento suele tener:
   - `title`: objeto con `es` y `eu`.
@@ -42,14 +42,12 @@ Este proyecto es una página estática para mostrar la carta de Ganbara. Los pla
 
 ## Despliegue en GitHub Pages
 
-GitHub Pages usa Jekyll por defecto y no publica carpetas que comienzan por guion bajo (como `_data/`).
+GitHub Pages usa Jekyll por defecto y no publica carpetas que empiezan por `_`. Para evitar problemas:
 
-Para que la página funcione y se pueda descargar `_data/platos.json`:
+- Este repo ya usa `data/platos.json` (sin guion bajo) y además incluye `.nojekyll` por si publicas desde otra carpeta.
+- Si migras desde una versión antigua que usaba `_data/platos.json`, el código intenta ambas rutas.
 
-- Incluye un archivo vacío llamado `.nojekyll` en la raíz del proyecto (ya añadido en este repo).
-- Alternativa: renombra la carpeta a `data/` y actualiza las rutas en el código (`const DATA_URL = 'data/platos.json'`).
-
-Después de hacer push a la rama publicada por Pages, espera ~1–2 minutos a que se regenere el sitio y recarga con Ctrl+F5.
+Tras hacer push a la rama publicada por Pages, espera ~1–2 minutos y recarga con Ctrl+F5.
 
 ### Sugerencias de estructura de imágenes
 

@@ -140,9 +140,10 @@
 
     <main>
       <script>
-        // Menu renderer from external JSON (_data/platos.json)
+        // Menu renderer from external JSON (data/platos.json)
         (function(){
-          const DATA_URL = '_data/platos.json';
+          // Try multiple locations to be resilient on GitHub Pages
+          const DATA_URLS = ['_data/platos.json', 'data/platos.json'];
           const FS_REST_URL = 'https://firestore.googleapis.com/v1/projects/carta-ganbara/databases/(default)/documents/menu/platos';
           let MENU_DATA = null;
           let CURRENT_LANG = 'es';
@@ -199,23 +200,30 @@
                   }
                 }
               } catch(_){}
-              // 2) Fallback to local file
+              // 2) Fallback to local file(s)
               if(!MENU_DATA){
-                const res = await fetch(DATA_URL, {cache:'no-cache'});
-                if(res.ok) MENU_DATA = await res.json();
+                for(const url of DATA_URLS){
+                  try{
+                    const res = await fetch(url, {cache:'no-cache'});
+                    if(res.ok){ MENU_DATA = await res.json(); break; }
+                  }catch(_){ /* ignore and try next */ }
+                }
               }
-              window.__MENU_IMAGES__ = ([])
-                .concat(MENU_DATA.hamburguesas||[])
-                .concat(MENU_DATA.chuletas||[])
-                .concat(MENU_DATA.raciones||[])
-                .concat(MENU_DATA.bocadillos||[])
-                .concat(MENU_DATA.postres||[])
-                .filter(x=>x && x.image)
-                .map(x=>x.image);
+              // Build image list only if we have data
+              if (MENU_DATA && typeof MENU_DATA === 'object') {
+                window.__MENU_IMAGES__ = ([])
+                  .concat(MENU_DATA.hamburguesas||[])
+                  .concat(MENU_DATA.chuletas||[])
+                  .concat(MENU_DATA.raciones||[])
+                  .concat(MENU_DATA.bocadillos||[])
+                  .concat(MENU_DATA.postres||[])
+                  .filter(x=>x && x.image)
+                  .map(x=>x.image);
+              }
               // Avisar a quien espere por las imágenes del menú
               try { document.dispatchEvent(new CustomEvent('menu-data-ready', { detail: { images: window.__MENU_IMAGES__ } })); } catch(_) {}
             }catch(e){
-              console.warn('No se pudo cargar _data/platos.json; usando HTML estático', e);
+              console.warn('No se pudo cargar data/platos.json; usando HTML estático', e);
             }
             return MENU_DATA;
           }
