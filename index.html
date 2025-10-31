@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ganbara — Carta</title>
   <meta name="description" content="Carta de Ganbara: hamburguesas, chuletas, raciones y bocadillos con ingredientes locales." />
-  <meta name="theme-color" content="#181818" />
+  <meta name="theme-color" content="#f5f5f5" />
   <meta name="color-scheme" content="dark light" />
   <link rel="icon" type="image/png" href="Logo_color_ganbara.png" />
   <!-- Preload fuentes principales para reducir FOUT -->
@@ -54,7 +54,7 @@
         left: 0;
       }
       .main-nav a {
-        background: var(--accent, #D4A056);
+        background: var(--nav-bg, var(--accent, #D4A056));
         color: #fff;
         border: none;
         border-radius: 6px;
@@ -68,7 +68,7 @@
         z-index: 2;
       }
       .main-nav a.active, .main-nav a:focus, .main-nav a:hover {
-        background: var(--accent-dark, #b8863f);
+        background: var(--nav-hover-bg, var(--accent-dark, #b8863f));
         color: #fff;
       }
       /* Las reglas del menú móvil ahora están en styles.css (mejor mantenido). */
@@ -102,7 +102,21 @@
         </nav>
 
         <div class="header-actions">
-          <button class="lang-btn" aria-label="Cambiar idioma" data-i18n="lang.btn" data-lang-toggle>ESP / EUS</button>
+          <button class="theme-btn" type="button" data-theme-toggle aria-label="Modo noche">
+            <span class="theme-btn__icon theme-btn__icon--moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false" role="presentation">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" fill="currentColor"></path>
+              </svg>
+            </span>
+            <span class="theme-btn__icon theme-btn__icon--sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false" role="presentation">
+                <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+                <path d="M12 2v2M12 20v2M4 12h2M18 12h2M5.64 5.64l1.42 1.42M16.94 16.94l1.42 1.42M5.64 18.36l1.42-1.42M16.94 7.06l1.42-1.42" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.6"></path>
+              </svg>
+            </span>
+            <span class="theme-btn__label sr-only">Modo noche</span>
+          </button>
+          <button class="lang-btn" aria-label="Cambiar idioma" data-i18n="lang.btn" data-lang-toggle>eu/es</button>
         </div>
 
   <div id="mobile-nav" class="mobile-nav" aria-hidden="false" role="navigation">
@@ -388,7 +402,7 @@
                 </span>
                 <div>
                   <div class="contact-label" data-i18n="contact.address" style="font-weight:600;">Dirección</div>
-                  <div style="color:var(--text-muted);">Domingo Irala Kalea, 6, 20570 Guipúzcoa, Gipuzkoa</div>
+                  <div style="color:var(--muted);">Domingo Irala Kalea, 6, 20570 Guipúzcoa, Gipuzkoa</div>
                 </div>
               </div>
               <div class="contact-row">
@@ -397,7 +411,7 @@
                 </span>
                 <div>
                   <div class="contact-label" data-i18n="contact.hours" style="font-weight:600;">Horario</div>
-                  <table class="contact-hours-table" style="color:var(--text-muted);margin-top:0.5em;">
+                  <table class="contact-hours-table" style="color:var(--muted);margin-top:0.5em;">
                     <tbody>
                       <tr><td>Lunes</td><td>9:00–0:30</td></tr>
                       <tr><td>Martes</td><td>9:00–0:30</td></tr>
@@ -429,6 +443,11 @@
         flex: 1 1 320px;
         min-width: 280px;
         max-width: 420px;
+        background: var(--panel-bg, #fff);
+        border: 1px solid var(--card-border, rgba(0,0,0,0.06));
+        border-radius: 18px;
+        box-shadow: var(--panel-shadow, 0 2px 16px rgba(0,0,0,0.07));
+        padding: 1.5rem 1.2rem 1.2rem 1.2rem;
         display: flex;
         flex-direction: column;
         gap: 2rem;
@@ -461,13 +480,23 @@
         flex: 1 1 320px;
         min-width: 280px;
         max-width: 440px;
-        background: #fff;
+        background: var(--panel-bg, #fff);
+        border: 1px solid var(--card-border, rgba(0,0,0,0.06));
         border-radius: 18px;
-        box-shadow: 0 2px 16px 0 rgba(0,0,0,0.07);
+        box-shadow: var(--panel-shadow, 0 2px 16px rgba(0,0,0,0.07));
         padding: 1.5rem 1.2rem 1.2rem 1.2rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
+      }
+      .contact-map-block iframe {
+        border-radius: 16px;
+        width: 100%;
+        max-width: 400px;
+        min-height: 220px;
+        border: 0;
+        background: #eee;
       }
       @media (max-width: 900px) {
         .contact-visual-grid {
@@ -477,6 +506,12 @@
         .contact-map-block, .contact-info-block {
           max-width: 100%;
         }
+      }
+      :root[data-theme="dark"] .contact-row a {
+        color: var(--accent);
+      }
+      :root[data-theme="dark"] .contact-map-block iframe {
+        background: #36251c;
       }
     </style>
       </section>
@@ -512,6 +547,10 @@
         z-index: 2;
         color: #222;
         text-shadow: 0 2px 8px #fff, 0 0 2px #fff;
+      }
+      :root[data-theme="dark"] .hero-inner h1 {
+        color: #fff;
+        text-shadow: 0 4px 14px rgba(0,0,0,0.65);
       }
     </style>
 
@@ -766,7 +805,9 @@
             'nav.raciones': 'Raciones',
             'nav.postres': 'Postres',
             'nav.contacto': 'Contacto',
-            'lang.btn': 'ESP / EUS',
+            'lang.btn': 'eu/es',
+            'theme.night': 'Modo noche',
+            'theme.day': 'Modo claro',
             'hero.title': 'Ganbara',
             'hero.lead': 'Sabor a nuestra tierra. Ingredientes locales y recetas con carácter.',
             'hero.cta': 'Ver la carta',
@@ -877,7 +918,9 @@
             'nav.raciones': 'hasierakoak',
             'nav.postres': 'Postreak',
             'nav.contacto': 'Kontaktua',
-            'lang.btn': 'EUS / ESP',
+            'lang.btn': 'eu/es',
+            'theme.night': 'Gaueko modua',
+            'theme.day': 'Modu argia',
             'hero.title': 'Ganbara',
             'hero.lead': 'Lurraldearen zaporea. Tokiko osagaiak eta nortasun handiko errezetak.',
             'hero.cta': 'Ikusi karta',
@@ -954,6 +997,75 @@
           }
         };
 
+        const THEME_KEY = 'ganbara_theme';
+        const themeBtn = document.querySelector('[data-theme-toggle]');
+        const themeLabel = themeBtn ? themeBtn.querySelector('.theme-btn__label') : null;
+        const themeMeta = document.querySelector('meta[name="theme-color"]');
+        const prefersDark = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')) || null;
+        let storedTheme = localStorage.getItem(THEME_KEY) || '';
+
+        function themeStrings(lang){
+          const fallback = translations['es'];
+          const dict = translations[lang] || fallback;
+          return {
+            night: (dict && dict['theme.night']) || (fallback && fallback['theme.night']) || 'Modo noche',
+            day: (dict && dict['theme.day']) || (fallback && fallback['theme.day']) || 'Modo claro'
+          };
+        }
+
+        function updateThemeMeta(theme){
+          if(!themeMeta) return;
+          themeMeta.setAttribute('content', theme === 'dark' ? '#201814' : '#f5f5f5');
+        }
+
+        function updateThemeButton(theme){
+          if(!themeBtn || !themeLabel) return;
+          const lang = document.documentElement.lang || 'es';
+          const strings = themeStrings(lang);
+          const label = theme === 'dark' ? strings.day : strings.night;
+          themeLabel.textContent = label;
+          themeBtn.setAttribute('aria-label', label);
+          themeBtn.setAttribute('title', label);
+        }
+
+        function applyTheme(theme, options){
+          const opts = Object.assign({ save: true }, options);
+          const normalized = theme === 'dark' ? 'dark' : 'light';
+          const root = document.documentElement;
+          root.setAttribute('data-theme', normalized);
+          root.classList.toggle('theme-dark', normalized === 'dark');
+          if(opts.save){
+            localStorage.setItem(THEME_KEY, normalized);
+            storedTheme = normalized;
+          }
+          updateThemeMeta(normalized);
+          updateThemeButton(normalized);
+        }
+
+        const handlePrefersChange = (event) => {
+          if(storedTheme === 'dark' || storedTheme === 'light') return;
+          applyTheme(event.matches ? 'dark' : 'light', { save: false });
+        };
+
+        if(prefersDark){
+          if(typeof prefersDark.addEventListener === 'function'){
+            prefersDark.addEventListener('change', handlePrefersChange);
+          } else if(typeof prefersDark.addListener === 'function'){
+            prefersDark.addListener(handlePrefersChange);
+          }
+        }
+
+        themeBtn && themeBtn.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          const next = current === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+        });
+
+        const initialTheme = (storedTheme === 'dark' || storedTheme === 'light')
+          ? storedTheme
+          : ((prefersDark && prefersDark.matches) ? 'dark' : 'light');
+        applyTheme(initialTheme, { save: false });
+
         const LS_KEY = 'ganbara_lang';
 
         function setLang(lang) {
@@ -996,6 +1108,7 @@
               }
           });
           document.documentElement.lang = (lang === 'es') ? 'es' : 'eu';
+          updateThemeButton(document.documentElement.getAttribute('data-theme') || 'light');
           localStorage.setItem(LS_KEY, lang);
           // If dynamic menu renderer exists, re-render with new language
           if(window.renderMenu){
@@ -1006,9 +1119,10 @@
         const btn = document.querySelector('.lang-btn');
         function updateLangButton(current){
           if(!btn) return;
-          // Mostrar solo el idioma alternativo
-          btn.textContent = current === 'es' ? 'EUS' : 'ESP';
-          btn.setAttribute('aria-label', current === 'es' ? 'Euskera' : 'Español');
+          btn.textContent = 'eu/es';
+          const targetLabel = current === 'es' ? 'Cambiar a euskera' : 'Cambiar a español';
+          btn.setAttribute('aria-label', targetLabel);
+          btn.setAttribute('title', targetLabel);
         }
         btn && btn.addEventListener('click', () => {
           const current = localStorage.getItem(LS_KEY) || 'es';
