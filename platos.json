@@ -19,10 +19,10 @@
   ],
   "raciones": [
     { "id": "jamon", "title": {"es":"Paletilla de jamón ibérico","eu":"Urdaiazpiko iberikoa"}, "desc": {"es":"Paletilla de jamón ibérico","eu":"Urdaiazpiko iberikoa"}, "price": "17€ / 9€", "spicy": 0 },
-    { "id": "rabas", "title": {"es":"Rabas","eu":"Rabak"}, "desc": {"es":"Rabas","eu":"Rabak"}, "price": "9,5€ / 5,5€", "spicy": 0 },
+    { "id": "rabas", "title": {"es":"Rabas","eu":"Rabak"}, "desc": {"es":"Rabas","eu":"Rabak"}, "price": "9,5€ / 5,5€", "image": "rabas.png", "spicy": 0 },
     { "id": "rabas_alioli", "title": {"es":"Rabas, cebolla crujiente y alioli","eu":"Rabak, tipula kurruskatua eta aioli"}, "desc": {"es":"Rabas, cebolla crujiente y alioli","eu":"Rabak, tipula kurruskatua eta aioli"}, "price": "9,5€", "spicy": 0 },
     { "id": "patatas", "title": {"es":"Patata casera","eu":"Etxeko patatak"}, "desc": {"es":"Brava y alioli (6€) / Bravioi (7€)", "eu":"Brava eta aioli (6€) / Bravioi (7€)"}, "price": "6€ / 7€", "spicy": 0 },
-    { "id": "croquetas", "title": {"es":"Croquetas de jamón o de hongos","eu":"Urdaiazpiko edo Ondo-kroketak"}, "desc": {"es":"Croquetas de jamón o de hongos","eu":"Urdaiazpiko edo Ondo-kroketak"}, "price": "9,5€", "spicy": 0 },
+    { "id": "croquetas", "title": {"es":"Croquetas de jamón/hongos","eu":"Urdaiazpiko edo Ondo-kroketak"}, "desc": {"es":"Croquetas de jamón o de hongos","eu":"Urdaiazpiko edo Ondo-kroketak"}, "price": "9,5€", "image": "croquetas.png", "spicy": 0 },
     { "id": "tequenos", "title": {"es":"Tequeños","eu":"Tequeñoak"}, "desc": {"es":"8 ud, salsa variada","eu":"8 ud, saltsa anitza"}, "price": "9,5€", "spicy": 0 },
     { "id": "champis", "title": {"es":"Champis con gambas a la vinagreta","eu":"Txanpiak ganbekin azpin-oliotan"}, "desc": {"es":"Champis con gambas a la vinagreta","eu":"Txanpiak ganbekin azpin-oliotan"}, "price": "8,5€", "spicy": 0 },
     { "id": "pollo", "title": {"es":"Piezas de pollo crujiente con patatas","eu":"Oilasko kurruskaria patatekin"}, "desc": {"es":"Piezas de pollo crujiente con patatas","eu":"Oilasko kurruskaria patatekin"}, "price": "9,5€", "spicy": 0 },

@@ -51,15 +51,6 @@
   gap: 28px 32px;
 }
 
-html[lang="eu"] .grid.cards {
-  justify-content: center;
-  justify-items: center;
-}
-
-html[lang="eu"] .grid.cards > * {
-  margin-inline: auto;
-}
-
 /* Skeleton placeholders to reserve space before data loads (reduces CLS) */
 .card--placeholder {
   position: relative;
@@ -378,21 +369,37 @@ body{padding-top:var(--header-height)}
 .header-actions{display:flex;align-items:center;gap:12px}
 
 .lang-btn{
-  appearance:none;border:0;cursor:pointer;font-weight:700;letter-spacing:.5px;
-  font-size:12px;line-height:1.1; padding:6px 12px; border-radius:36px;
+  appearance:none;
+  border:1px solid var(--theme-btn-border, rgba(0,0,0,0.3));
+  cursor:pointer;
+  font-weight:700;
+  letter-spacing:.6px;
+  font-size:13px;
+  line-height:1;
+  width:42px;
+  height:42px;
+  min-width:42px;
+  padding:0;
+  border-radius:50%;
   background:linear-gradient(135deg,var(--accent) 0%,var(--accent-dark) 100%);
-  color:#fff; box-shadow:0 4px 14px rgba(0,0,0,0.18);
-  display:inline-flex;align-items:center;gap:6px;position:relative;overflow:hidden;
-  transition:background .35s ease,transform .18s ease, box-shadow .25s ease;
+  color:#fff;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  text-transform:uppercase;
+  transition:background .35s ease,transform .18s ease,box-shadow .25s ease,border-color .25s ease;
 }
-.lang-btn:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.35),transparent 60%);opacity:.25;transition:opacity .4s}
+.lang-btn:before{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.35),transparent 60%);opacity:.25;transition:opacity .4s}
 .lang-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.28);}
 .lang-btn:active{transform:translateY(0);box-shadow:0 4px 10px rgba(0,0,0,0.25);}
 .lang-btn:hover:before{opacity:.4}
 .lang-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
 
 @media (max-width:480px){
-  .lang-btn{padding:5px 10px;font-size:11px}
+  .lang-btn{width:38px;height:38px;min-width:38px;font-size:11px}
 }
 
 .theme-btn{

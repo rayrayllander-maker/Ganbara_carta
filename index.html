@@ -116,7 +116,7 @@
             </span>
             <span class="theme-btn__label sr-only">Modo noche</span>
           </button>
-          <button class="lang-btn" aria-label="Cambiar idioma" data-i18n="lang.btn" data-lang-toggle>eu/es</button>
+          <button class="lang-btn" aria-label="Cambiar idioma" data-i18n="lang.btn" data-lang-toggle>ES</button>
         </div>
 
   <div id="mobile-nav" class="mobile-nav" aria-hidden="false" role="navigation">
@@ -805,7 +805,7 @@
             'nav.raciones': 'Raciones',
             'nav.postres': 'Postres',
             'nav.contacto': 'Contacto',
-            'lang.btn': 'eu/es',
+            'lang.btn': 'ES',
             'theme.night': 'Modo noche',
             'theme.day': 'Modo claro',
             'hero.title': 'Ganbara',
@@ -918,7 +918,7 @@
             'nav.raciones': 'hasierakoak',
             'nav.postres': 'Postreak',
             'nav.contacto': 'Kontaktua',
-            'lang.btn': 'eu/es',
+            'lang.btn': 'EU',
             'theme.night': 'Gaueko modua',
             'theme.day': 'Modu argia',
             'hero.title': 'Ganbara',
@@ -1119,7 +1119,9 @@
         const btn = document.querySelector('.lang-btn');
         function updateLangButton(current){
           if(!btn) return;
-          btn.textContent = 'eu/es';
+          const currentCode = current === 'es' ? 'ES' : 'EU';
+          btn.textContent = currentCode;
+          btn.setAttribute('data-current-lang', currentCode.toLowerCase());
           const targetLabel = current === 'es' ? 'Cambiar a euskera' : 'Cambiar a español';
           btn.setAttribute('aria-label', targetLabel);
           btn.setAttribute('title', targetLabel);
