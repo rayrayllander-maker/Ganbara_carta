@@ -207,21 +207,42 @@
             return '<span class="spicy-icon" aria-label="' + (count===2?'Muy picante':'Picante') + '" title="' + (count===2?'Muy picante':'Picante') + '">' + '<i class="fa-solid fa-pepper-hot" aria-hidden="true"></i>'.repeat(count) + '</span>';
           }
 
+          function formatCurrency(value){
+            if(typeof value !== 'number' || Number.isNaN(value)) return '';
+            const hasDecimals = Math.abs(value % 1) > 0;
+            const localeString = value.toLocaleString('es-ES', {
+              minimumFractionDigits: hasDecimals ? 2 : 0,
+              maximumFractionDigits: hasDecimals ? 2 : 0
+            });
+            return `${localeString}€`;
+          }
+
+          function formatPrice(item){
+            if(!item) return '';
+            const main = formatCurrency(item.precio);
+            const half = formatCurrency(item.mediaRacion);
+            if(main && half){
+              return `${main} / ${half}`;
+            }
+            return main || '';
+          }
+
           function cardHTML(item){
-            const title = (item.title && (item.title[CURRENT_LANG] || item.title.es)) || '';
-            const desc = (item.desc && (item.desc[CURRENT_LANG] || item.desc.es)) || '';
-            const price = item.price || '';
-            const hasImage = !!item.image;
-            const dataImage = hasImage ? ' data-image="'+item.image+'"' : '';
+            const title = (item.nombre && (item.nombre[CURRENT_LANG] || item.nombre.es)) || '';
+            const desc = (item.descripcion && (item.descripcion[CURRENT_LANG] || item.descripcion.es)) || '';
+            const priceValue = formatPrice(item);
+            const hasImage = !!item.imagen;
+            const dataImage = hasImage ? ' data-image="'+item.imagen+'"' : '';
             const photoIcon = hasImage ? '<span class="dish-photo-icon" aria-hidden="true"><img src="cam.svg" alt="" width="24" height="24" loading="lazy" decoding="async" /></span>' : '';
-            const peppers = spicyIcons(item.spicy);
-            const titleWrapperOpen = (photoIcon || peppers) ? '<span class="menu-card-title-wrapper">' : '';
-            const titleWrapperClose = (photoIcon || peppers) ? '</span>' : '';
+            const peppers = spicyIcons(item.picante);
+            const priceMarkup = priceValue ? `<span class="menu-card-price">${priceValue}</span>` : '';
+            const metaParts = [photoIcon, peppers, priceMarkup].filter(Boolean);
+            const metaMarkup = metaParts.length ? `<span class="menu-card-meta">${metaParts.join('')}</span>` : '';
             return `
               <article class="card menu-card"${dataImage}>
                 <div class="menu-card-header">
-                  ${titleWrapperOpen}<span class="menu-card-title">${title}</span>${photoIcon}${peppers}${titleWrapperClose}
-                  <span class="menu-card-price">${price}</span>
+                  <span class="menu-card-title">${title}</span>
+                  ${metaMarkup}
                 </div>
                 <div class="menu-card-desc">${desc}</div>
               </article>
@@ -268,8 +289,8 @@
                   .concat(MENU_DATA.raciones||[])
                   .concat(MENU_DATA.bocadillos||[])
                   .concat(MENU_DATA.postres||[])
-                  .filter(x=>x && x.image)
-                  .map(x=>x.image);
+                  .filter(x=>x && x.imagen)
+                  .map(x=>x.imagen);
                 DEBUG_INFO.counts = {
                   hamburguesas: (MENU_DATA.hamburguesas||[]).length,
                   chuletas: (MENU_DATA.chuletas||[]).length,
@@ -736,15 +757,17 @@
           const header = card.querySelector('.menu-card-header');
           if(!header) return;
           if(header.querySelector('.dish-photo-icon')) return; // already has icon
-          // Find or create a title wrapper
-          let wrapper = header.querySelector('.menu-card-title-wrapper');
-          if(!wrapper){
-            const titleEl = header.querySelector('.menu-card-title');
-            if(!titleEl) return;
-            wrapper = document.createElement('span');
-            wrapper.className = 'menu-card-title-wrapper';
-            titleEl.replaceWith(wrapper);
-            wrapper.appendChild(titleEl);
+          let meta = header.querySelector('.menu-card-meta');
+          if(!meta){
+            meta = document.createElement('span');
+            meta.className = 'menu-card-meta';
+            const priceEl = header.querySelector('.menu-card-price');
+            if(priceEl && priceEl.parentElement === header){
+              header.replaceChild(meta, priceEl);
+              meta.appendChild(priceEl);
+            } else {
+              header.appendChild(meta);
+            }
           }
           const icon = document.createElement('span');
           icon.className = 'dish-photo-icon';
@@ -755,7 +778,11 @@
           img.width = 24; img.height = 24;
           img.loading = 'lazy'; img.decoding = 'async';
           icon.appendChild(img);
-          wrapper.appendChild(icon);
+          if(meta.firstChild){
+            meta.insertBefore(icon, meta.firstChild);
+          } else {
+            meta.appendChild(icon);
+          }
         });
       })();
     </script>

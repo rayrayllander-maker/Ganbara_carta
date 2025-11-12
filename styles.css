@@ -34,9 +34,11 @@
   background: var(--price-bg, #f2f9f3);
   border-radius: 8px;
   padding: 2px 14px;
-  margin-left: 16px;
   min-width: 70px;
-  text-align: right;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .menu-card-desc {
   color: var(--text, #222);
@@ -536,10 +538,11 @@ html[data-theme="dark"] .dish-lightbox__note{color:#cfd0d4;}
 }
 /* Camera icon now inline next to title */
 .menu-card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
-.menu-card-header .menu-card-title-wrapper{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
-.menu-card-header .spicy-icon{display:inline-flex;align-items:center;justify-content:center;gap:4px;margin-left:2px}
-.menu-card-header .spicy-icon .fa-pepper-hot{color:#e11d48; /* rojo picante */ font-size:1.05em; filter: drop-shadow(0 1px 0 rgba(0,0,0,0.15));}
-.menu-card-header .menu-card-title-wrapper .dish-photo-icon{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:4px;background:transparent;box-shadow:none;opacity:.95;transition:transform .35s cubic-bezier(.16,.84,.44,1),opacity .3s;pointer-events:none;line-height:0;padding:0;}
+.menu-card-title{flex:1;min-width:0;display:block;}
+.menu-card-meta{display:inline-flex;align-items:center;gap:8px;flex-shrink:0;}
+.menu-card-meta .spicy-icon{display:inline-flex;align-items:center;justify-content:center;gap:4px;margin:0;}
+.menu-card-meta .spicy-icon .fa-pepper-hot{color:#e11d48; /* rojo picante */ font-size:1.05em; filter: drop-shadow(0 1px 0 rgba(0,0,0,0.15));}
+.menu-card-meta .dish-photo-icon{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:4px;background:transparent;box-shadow:none;opacity:.95;transition:transform .35s cubic-bezier(.16,.84,.44,1),opacity .3s;pointer-events:none;line-height:0;padding:0;}
 .menu-card[data-image]:hover .dish-photo-icon{transform:scale(1.12) rotate(-6deg);opacity:1}
 .menu-card[data-image]:active .dish-photo-icon{transform:scale(.95);}
 @media (prefers-reduced-motion:reduce){
