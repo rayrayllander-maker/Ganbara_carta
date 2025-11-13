@@ -77,7 +77,7 @@
         "eu": "180 gr. Angus haragia, cheddar gazta, hirugiharra bikoitza, tipula karamelizatua, pepinilloak, arrautza eta Emmy saltsa."
       },
       "precio": 13.5,
-      "imagen": null,
+      "imagen": "emmy.png",
       "picante": 1,
       "disponible": true
     },
